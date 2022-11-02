@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="helloshark, Snark&#39;s blog">
-    <meta name="description" content="MISC">
+    <meta name="keywords" content="PNG图片转换器, Snark&#39;s blog">
+    <meta name="description" content="WEB">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>helloshark | Snark&#39;s blog</title>
+    <title>PNG图片转换器 | Snark&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -278,12 +278,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">helloshark</h1>
+                    <h1 class="description center-align post-title">PNG图片转换器</h1>
                 </div>
             </div>
         </div>
@@ -344,20 +344,28 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>首先下载附件</p>
-<p>解压后发现是个.bmp的图片，直接拖进kali用foremost分离，但是我这里是用的7z直接就点开了</p>
-<p><img src="/images/helloshark/1.png"></p>
-<p>打开后发现需要解压密码，根据他的提示可知解压密码就在我们之前那个.bmp图片里</p>
-<p>这里用zsteg这个工具分析这个图片</p>
-<p><img src="/images/helloshark/2.png"></p>
-<p>发现有个password，应该就是解压密码</p>
-<p><img src="/images/helloshark/3.png"></p>
-<p>解压出来后直接看流量包，跟踪TCP流，最终找到一条比较可疑的数据流</p>
-<p><img src="/images/helloshark/4.png"></p>
-<p>多观察发现这一列有一串flag的字样</p>
-<p><img src="/images/helloshark/5.png"></p>
-<p>最终拼接出来就是flag的基本格式的样子，提交，完成</p>
-<p><img src="/images/helloshark/6.png"></p>
+                <h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p>
+<p><img src="/images/blog/1.png"></p>
+<h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p>
+<p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p>
+<p><img src="/images/blog/2.1.png"></p>
+<p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p>
+<p>原理见：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/Xxy605/article/details/120373095</span><br></pre></td></tr></table></figure>
+
+<p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p>
+<p><img src="/images/blog/2.2.png" alt="2.2"></p>
+<p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p>
+<p><img src="/./images/blog/2.3.png" alt="2.3"></p>
+<p>读取该png，内容解码发现了flag</p>
+<p><img src="/./images/blog/2.4.png" alt="2.4"></p>
+<p><img src="/./images/blog/2.5.png" alt="2.5"></p>
+<p>一样的方法用cat读取</p>
+<p><img src="/./images/blog/2.6.png" alt="2.6"></p>
+<p><img src="/./images/blog/2.7.png" alt="2.7"></p>
+<p><img src="/./images/blog/2.8.png" alt="2.8"></p>
+<p>base解码就可以得到flag</p>
 
                 
             </div>
@@ -384,7 +392,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/10/21/helloshark/">http://example.com/2022/10/21/helloshark/</a>
+                    <a href="http://example.com/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/">http://example.com/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -469,18 +477,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/21/helloshark/">
+                <a href="/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="helloshark">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="一个密码">
                         
-                        <span class="card-title">helloshark</span>
+                        <span class="card-title">一个密码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -490,9 +497,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-21
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -501,7 +508,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -517,22 +523,22 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2022/10/21/bilibili/">
+                <a href="/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="bilibili">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="PNG图片转换器">
                         
-                        <span class="card-title">bilibili</span>
+                        <span class="card-title">PNG图片转换器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MISC
+                            WEB
                         
                     </div>
                     <div class="publish-info">
@@ -547,6 +553,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
