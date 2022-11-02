@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Snark&#39;s blog</title>
+  
+  <subtitle>相逢的人会再相逢</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-11-02T09:48:47.464Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Snark</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c2nu</title>
+    <link href="http://example.com/2022/10/21/c2nu/"/>
+    <id>http://example.com/2022/10/21/c2nu/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T09:48:47.464Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;下载附件是个word文档，打开提示我们flag不在这里&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/c2nu/1.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bilibili</title>
+    <link href="http://example.com/2022/10/21/bilibili/"/>
+    <id>http://example.com/2022/10/21/bilibili/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T09:10:05.762Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
+&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>helloshark</title>
+    <link href="http://example.com/2022/10/21/helloshark/"/>
+    <id>http://example.com/2022/10/21/helloshark/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T08:24:54.057Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;首先下载附件&lt;/p&gt;
+&lt;p&gt;解压后发现是个.bmp的图片，直接拖进kali用foremost分离，但是我这里是用的7z直接就点开了&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PNG图片转换器</title>
+    <link href="http://example.com/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
+    <id>http://example.com/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T09:10:14.740Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
+&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一个密码</title>
+    <link href="http://example.com/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/"/>
+    <id>http://example.com/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T09:10:09.339Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;下载文件后打开发现是一堆数字，多次测试发现是八进制，转码可得&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>流量里的二维码</title>
+    <link href="http://example.com/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+    <id>http://example.com/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T09:10:11.878Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;流量里的二维码&quot;&gt;&lt;a href=&quot;#流量里的二维码&quot; class=&quot;headerlink&quot; title=&quot;流量里的二维码&quot;&gt;&lt;/a&gt;流量里的二维码&lt;/h1&gt;&lt;p&gt;打开流量包发现全是ICMP的包&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    
+  </entry>
+  
+</feed>

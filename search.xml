@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>c2nu</title>
+      <link href="/2022/10/21/c2nu/"/>
+      <url>/2022/10/21/c2nu/</url>
+      
+        <content type="html"><![CDATA[<p>下载附件是个word文档，打开提示我们flag不在这里</p><p><img src="/images/c2nu/1.png"></p><p>拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了</p><p><img src="/images/c2nu/2.png"></p><p>打开后在里面找到个flag.zip的文件，打开后发现需要密码，根据他的提示是弱口令密码，爆破得到密码是password</p><p><img src="/images/c2nu/3.png"></p><p>打开me}.txt文件发现里面是一串十六进制文件，我想到的是十六进制转文本(当然对数字敏感的就能直接发现这开头就是个png的格式)</p><p><img src="/images/c2nu/4.png"></p><p>看开头就知道是个png文件，复制粘贴进010保存为png图片</p><p><img src="/images/c2nu/5.png"></p><p><img src="/images/c2nu/6.png"></p><p>直接丢进stegsolve分析</p><p><img src="/images/c2nu/7.png"></p><p>得到前半截flag，与之前文件名的后半截拼接得到完整flag</p><p><img src="/images/c2nu/8.png"></p><p>flag{seeme}</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>bilibili</title>
+      <link href="/2022/10/21/bilibili/"/>
+      <url>/2022/10/21/bilibili/</url>
+      
+        <content type="html"><![CDATA[<p>首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整</p><p>打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件</p><p><img src="/images/bilibili/1.png"></p><p>这里我用7z能直接打开bmp的文件得到flag.txt</p><p><img src="/images/bilibili/2.png"></p><p><img src="/images/bilibili/3.png"></p><p>有%，猜测是url编码，解码得</p><p><img src="/images/bilibili/4.png"></p><p>有\u，是Unicode编码，解码得</p><p><img src="/images/bilibili/5.png"></p><p>至此得到一半的flag了，剩下的flag经过我一系列寻找最终在最开始的.bmp文件通过stegsolve工具找到</p><p><img src="/images/bilibili/6.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>helloshark</title>
+      <link href="/2022/10/21/helloshark/"/>
+      <url>/2022/10/21/helloshark/</url>
+      
+        <content type="html"><![CDATA[<p>首先下载附件</p><p>解压后发现是个.bmp的图片，直接拖进kali用foremost分离，但是我这里是用的7z直接就点开了</p><p><img src="/images/helloshark/1.png"></p><p>打开后发现需要解压密码，根据他的提示可知解压密码就在我们之前那个.bmp图片里</p><p>这里用zsteg这个工具分析这个图片</p><p><img src="/images/helloshark/2.png"></p><p>发现有个password，应该就是解压密码</p><p><img src="/images/helloshark/3.png"></p><p>解压出来后直接看流量包，跟踪TCP流，最终找到一条比较可疑的数据流</p><p><img src="/images/helloshark/4.png"></p><p>多观察发现这一列有一串flag的字样</p><p><img src="/images/helloshark/5.png"></p><p>最终拼接出来就是flag的基本格式的样子，提交，完成</p><p><img src="/images/helloshark/6.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PNG图片转换器</title>
+      <link href="/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
+      <url>/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p><p><img src="/images/blog/1.png"></p><h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p><p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p><p><img src="/images/blog/2.1.png"></p><p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p><p>原理见：</p><pre><code>https://blog.csdn.net/Xxy605/article/details/120373095</code></pre><p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p><p><img src="/images/blog/2.2.png" alt="2.2"></p><p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p><p><img src="/./images/blog/2.3.png" alt="2.3"></p><p>读取该png，内容解码发现了flag</p><p><img src="/./images/blog/2.4.png" alt="2.4"></p><p><img src="/./images/blog/2.5.png" alt="2.5"></p><p>一样的方法用cat读取</p><p><img src="/./images/blog/2.6.png" alt="2.6"></p><p><img src="/./images/blog/2.7.png" alt="2.7"></p><p><img src="/./images/blog/2.8.png" alt="2.8"></p><p>base解码就可以得到flag</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一个密码</title>
+      <link href="/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/"/>
+      <url>/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/</url>
+      
+        <content type="html"><![CDATA[<p>下载文件后打开发现是一堆数字，多次测试发现是八进制，转码可得</p><p><img src="/images/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/1.png"></p><p>得到的字符串应该是base加密，再解码可得flag</p><p><img src="/images/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/2.png"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>流量里的二维码</title>
+      <link href="/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+      <url>/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="流量里的二维码"><a href="#流量里的二维码" class="headerlink" title="流量里的二维码"></a>流量里的二维码</h1><p>打开流量包发现全是ICMP的包</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/1.png"></p><p>发现reply的数据中，ttl都是64，猜测request才是解题的关键，那就单独看request的数据</p><p>根据题目提示，要找出隐藏的二维码，所以优先考虑二进制数据，不过这里并没有找到，于是把目光放在ttl的值上。把所以的值看完了发现最大值不超过255，这更加验证了我们的想法</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/2.png"></p><p>这里我们用kali自带的工具tshark把我们想要的数据提取出来</p><pre><code>tshark -r wireshark.pcap -Y "ip.src == 172.17.0.3" -T fields -e "ip.ttl" &gt; 1.txt</code></pre><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/3.png"></p><p>写脚本把每一行的数据都转为八位的二进制</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/4.png"></p><pre><code>from PIL import Imagef=open("1.txt","r")MAX = 22  #图片边长img = Image.new("RGB",(MAX,MAX))str=""for line in f.readlines():    line=line.replace("\n","")    str += bin(int(line))[2:].zfill(8)str=str[:-4]i = 0for y in range (0,MAX):    for x in range (0,MAX):        if(str[i] == '1'):            img.putpixel([x,y],(0, 0, 0))        else:            img.putpixel([x,y],(255,255,255))        i = i+1img.show()img.save("flag.png")</code></pre><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/5.png"></p><p>扫出来就是flag{ttleasy}</p><p>参考地址：<a href="https://blog.csdn.net/weixin_45696568/article/details/111413521">https://blog.csdn.net/weixin_45696568/article/details/111413521</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
