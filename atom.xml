@@ -67,27 +67,25 @@
   </entry>
   
   <entry>
-    <title>bilibili</title>
-    <link href="http://emyia2001.github.io/2022/10/21/bilibili/"/>
-    <id>http://emyia2001.github.io/2022/10/21/bilibili/</id>
+    <title>WSL安装与卸载</title>
+    <link href="http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
+    <id>http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</id>
     <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T13:33:20.415Z</updated>
+    <updated>2022-11-02T14:06:28.985Z</updated>
     
-    <content type="html"><![CDATA[<p>[TOC]</p><p>首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整</p><p>打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件</p><p><img src="/images/bilibili/1.png"></p><p>这里我用7z能直接打开bmp的文件得到flag.txt</p><p><img src="/images/bilibili/2.png"></p><p><img src="/images/bilibili/3.png"></p><p>有%，猜测是url编码，解码得</p><p><img src="/images/bilibili/4.png"></p><p>有\u，是Unicode编码，解码得</p><p><img src="/images/bilibili/5.png"></p><p>至此得到一半的flag了，剩下的flag经过我一系列寻找最终在最开始的.bmp文件通过stegsolve工具找到</p><p><img src="/images/bilibili/6.png"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br></pre></td></tr></tbody></table></figure><p>重启后以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br></pre></td></tr></tbody></table></figure><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y kali-win-kex</span><br></pre></td></tr></tbody></table></figure><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --win-s</span><br></pre></td></tr></tbody></table></figure><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --esm --ip -s</span><br></pre></td></tr></tbody></table></figure><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --sl -s</span><br></pre></td></tr></tbody></table></figure><p>工具包</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y kali-linux-large</span><br></pre></td></tr></tbody></table></figure><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wslconfig /l</span><br><span class="line"># 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令</span><br><span class="line">wslconfig /u Ubuntu</span><br></pre></td></tr></tbody></table></figure>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
-&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/image</summary>
+    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3 id=&quot;在-WSL2-中安装-Kali-Linux&quot;&gt;&lt;a href=&quot;#在-WSL2-中安装-Kali-Lin</summary>
       
     
     
     
     
-    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
@@ -118,6 +116,31 @@
   </entry>
   
   <entry>
+    <title>bilibili</title>
+    <link href="http://emyia2001.github.io/2022/10/21/bilibili/"/>
+    <id>http://emyia2001.github.io/2022/10/21/bilibili/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:33:20.415Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><p>首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整</p><p>打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件</p><p><img src="/images/bilibili/1.png"></p><p>这里我用7z能直接打开bmp的文件得到flag.txt</p><p><img src="/images/bilibili/2.png"></p><p><img src="/images/bilibili/3.png"></p><p>有%，猜测是url编码，解码得</p><p><img src="/images/bilibili/4.png"></p><p>有\u，是Unicode编码，解码得</p><p><img src="/images/bilibili/5.png"></p><p>至此得到一半的flag了，剩下的flag经过我一系列寻找最终在最开始的.bmp文件通过stegsolve工具找到</p><p><img src="/images/bilibili/6.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
+&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image</summary>
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>流量里的二维码</title>
     <link href="http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
     <id>http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</id>
@@ -138,29 +161,6 @@
     
     
     <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WSL安装与卸载</title>
-    <link href="http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
-    <id>http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T14:06:28.985Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br></pre></td></tr></tbody></table></figure><p>重启后以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br></pre></td></tr></tbody></table></figure><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y kali-win-kex</span><br></pre></td></tr></tbody></table></figure><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --win-s</span><br></pre></td></tr></tbody></table></figure><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --esm --ip -s</span><br></pre></td></tr></tbody></table></figure><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --sl -s</span><br></pre></td></tr></tbody></table></figure><p>工具包</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y kali-linux-large</span><br></pre></td></tr></tbody></table></figure><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wslconfig /l</span><br><span class="line"># 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令</span><br><span class="line">wslconfig /u Ubuntu</span><br></pre></td></tr></tbody></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h3 id=&quot;在-WSL2-中安装-Kali-Linux&quot;&gt;&lt;a href=&quot;#在-WSL2-中安装-Kali-Lin</summary>
-      
-    
-    
-    
-    
-    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
