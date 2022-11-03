@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Windows开发配置, Snark&#39;s blog">
-    <meta name="description" content="个人powershell的美化及配置，scoop包管理器的安装，以及一些常见服务的搭建">
+    <meta name="keywords" content="DNS服务搭建, Snark&#39;s blog">
+    <meta name="description" content="技能大赛">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Windows开发配置 | Snark&#39;s blog</title>
+    <title>DNS服务搭建 | Snark&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -281,12 +281,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Windows开发配置</h1>
+                    <h1 class="description center-align post-title">DNS服务搭建</h1>
                 </div>
             </div>
         </div>
@@ -310,8 +310,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-                                <span class="chip bg-color">开发环境</span>
+                            <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">
+                                <span class="chip bg-color">服务搭建</span>
                             </a>
                         
                     </div>
@@ -326,14 +326,6 @@
                                 服务搭建
                             </a>
                         
-                            <a href="/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/powershell%E7%BE%8E%E5%8C%96/" class="post-category">
-                                powershell美化
-                            </a>
-                        
-                            <a href="/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/powershell%E7%BE%8E%E5%8C%96/WSL/" class="post-category">
-                                WSL
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -343,7 +335,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-02
+                    2022-11-03
                 </div>
                 
 
@@ -357,14 +349,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -385,184 +377,158 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>[TOC]</p>
-<h2 id="powershell美化"><a href="#powershell美化" class="headerlink" title="powershell美化"></a>powershell美化</h2><h4 id="fzf文件搜索"><a href="#fzf文件搜索" class="headerlink" title="fzf文件搜索"></a>fzf文件搜索</h4><pre><code># 安装fzf
-scoop install fzf
+<h1 id="DNS服务配置"><a href="#DNS服务配置" class="headerlink" title="DNS服务配置"></a>DNS服务配置</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol>
+<li><p>设置所有 Linux 服务器的时区设为“上海”，本地时间调整为实际时间。 </p>
+</li>
+<li><p>启动所有 Linux 服务器的防火墙，并添加相应端口（不允许添加服务） 放行相关服务。 </p>
+</li>
+<li><p>利用 chrony 配置 Linux-1 为其他 Linux 主机提供时间同步服务。 </p>
+</li>
+<li><p>利用 bind9 软件，配置 Linux-1 为主 DNS 服务器，采用 rndc 技术提供 不间断的 DNS 服务；配置 Linux-2 为备用 DNS 服务器，为所有 Linux 主 机提供冗余 DNS 正反向解析服务。 </p>
+</li>
+<li><p>所有 Linux 主机 root 用户使用完全合格域名免密码 ssh 登录到其他 Linux 主机。 </p>
+</li>
+<li><p>配置 Linux-1 为 CA 服务器,为所有 Linux 主机颁发证书，不允许修改 /etc/pki/tls/openssl.conf。CA 证书有效期 20 年，CA 颁发证书有效 期均为 10 年，证书信息：国家=“CN”，省=“Beijing”，城市=“Beijing”， 组织=“skills”，组织单位=“system”。chrome 浏览器访问 https 网站 时，不出现证书警告提示信息。</p>
+</li>
+</ol>
+<h2 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h2><pre class=" language-plain"><code class="language-plain"># 修改主机名
+hostnamectl set-hostname 主机名
 </code></pre>
-<h4 id="添加用户配置文件"><a href="#添加用户配置文件" class="headerlink" title="添加用户配置文件"></a>添加用户配置文件</h4><p>把user_profile.ps1、command_profile.ps1文件创建到 “用户目录.config\powershell” 下<br>使用$profile查看PowerShell配置文件，打开文件添加以下命令</p>
-<h4 id="oh-my-posh"><a href="#oh-my-posh" class="headerlink" title="oh-my-posh"></a>oh-my-posh</h4><pre><code># 安装oh-my-posh
-scoop install oh-my-posh
+<pre><code># 挂载镜像
+mkdir /media/CentOS
+mount -t iso9660 -o loop /dev/cdrom /media/CentOS
+mount -a             #挂载
+df -h              #查看挂载
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/1.png"></p>
+<pre><code># 配置IP
+vim /etc/sysconfig/network-scripts/ifcfg-ens33  #ens33为网卡名
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/2.png"></p>
+<pre><code>systemctl restart network      #重启network
+systemctl status network       #查看状态
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/3.png"></p>
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>Linux -1 172.16.100.254 服务端</p>
+<p>Linux 172.16.100.201 客服端</p>
+<h3 id="设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。"><a href="#设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。" class="headerlink" title="设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。"></a>设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。</h3><pre><code>timedatectl set-timezone Asia/Shanghai    #设置时区为上海
+timedatectl 							  #验证
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/4.png"></p>
+<pre><code>yum -y install ntpdate
+service ntpdate restart
+rm -rf /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtim
+</code></pre>
+<h3 id="设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。-1"><a href="#设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。-1" class="headerlink" title="设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。"></a>设置所有linux服务器的时区设为“上海”，本地时间调整为实际时间。</h3><pre><code># 放行防火墙端口 Linux-1(服务端)
+firewall-cmd --add-port==123/udp --permanent
+firewall-cmd --reload
+firewall-cmd --list-all|grep 123
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/5.png"></p>
+<h3 id="利用chrony配置Linux-1为其他Linux主机提供时间同步服务。"><a href="#利用chrony配置Linux-1为其他Linux主机提供时间同步服务。" class="headerlink" title="利用chrony配置Linux-1为其他Linux主机提供时间同步服务。"></a>利用chrony配置Linux-1为其他Linux主机提供时间同步服务。</h3><p>centos默认安装了chrony（保证虚拟机之间能够通信）</p>
+<p>服务端Linux -1 上配置：</p>
+<pre><code>vim /etc/chrony.conf          #修改以下内容 
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/6.png"></p>
+<pre><code>systemctl restart chronyd.service     #重启服务
+systemctl enable chronyd.service
+</code></pre>
+<p>Linux 上的配置：</p>
+<pre><code>vim /etc/crontab   #添加以下内容
+# 172.16.100.254 为服务端的地址
+</code></pre>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/7.png"></p>
+<p>用date查看时间方可进行检测</p>
+<p><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/8.png"><img src="/images/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/9.png"></p>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="Liunx1为主DNS"><a href="#Liunx1为主DNS" class="headerlink" title="Liunx1为主DNS"></a>Liunx1为主DNS</h3><pre><code>yum install -y bind bind-utils #安装dns软件包
+vim /etc/named.conf #修改主配置文件
+</code></pre>
+<pre><code>options {
+    listen-on port 53 { any; }; #53端口在所有网段进行侦
+    allow-query     { any; }; #允许所有网段查询
+</code></pre>
+<pre><code>vim /etc/named.rfc1912.zones #在zone文件里添加正反向区域
+</code></pre>
+<pre><code>zone "skills.com" IN { #正向查找区域zone文件
+        type master; #类型为主人
+        file "zx1"; #文件名为zx1
+        allow-update { none; };
+};
 
-# 在用户配置文件中添加
-oh-my-posh --init --shell pwsh --config C:\Users\31438\scoop\apps\oh-my-posh\current\themes\unicorn.omp.json | Invoke-Expression
+zone "70.10.10.in-addr.arpa" IN { #反向查找区域zone文件
+        type master; #类型为主人
+        file "fx1";#文件名为fx1
+        allow-update { none; };
+};
 </code></pre>
-<h4 id="Terminal-Icons"><a href="#Terminal-Icons" class="headerlink" title="Terminal-Icons"></a>Terminal-Icons</h4><pre><code># 安装Terminal-Icons
-scoop install terminal-icons
-
-# 在用户配置文件下添加
-Import-Module -Name Terminal-Icons
+<pre><code>cd /var/named/ #进入这个目录
+cp -a named.localhost zx1 #将这个文件所有内容属性复制到zx1
+vim zx1#编辑zx1（正向查找）
 </code></pre>
-<h4 id="posh-git"><a href="#posh-git" class="headerlink" title="posh-git"></a>posh-git</h4><pre><code># 安装posh-git
-scoop install posh-git
-
-# 在用户配置文件下添加
-Import-Module posh-git
+<pre><code>$TTL 1D
+@       IN SOA  cs1 rname.invalid. ( #SOA记录
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        NS      cs1.skills.com.#NS记录
+        NS      cs2.skills.com.
+        A       127.0.0.1
+        AAAA    ::1
+        MX      5       cs2 #MX记录
+cs1     A       10.10.70.11 #A记录
+cs2     A       10.10.70.12
+cs3     A       10.10.70.13
+cs4     A       10.10.70.14
+cs5     A       10.10.70.15
+cs6     A       10.10.70.16
+cs7     A       10.10.70.17
+tomcat  CNAME   cs1
 </code></pre>
-<h4 id="PSReadLine"><a href="#PSReadLine" class="headerlink" title="PSReadLine"></a>PSReadLine</h4><p>查看PSReadLine的全部函数</p>
-<pre><code>Get-PSReadLineKeyHandler
+<h3 id="Linux2为备用DNS"><a href="#Linux2为备用DNS" class="headerlink" title="Linux2为备用DNS"></a>Linux2为备用DNS</h3><pre><code>yum install -y bind bind-utils #安装dns软件包
+vim /etc/named.conf #修改主配置文件
 </code></pre>
-<p>安装</p>
-<pre><code># 安装PSReadLine
-Install-Module -Name PSReadLine -AllowPrerelease -Force
+<pre><code>@       IN SOA  cs1.skills.com. rname.invalid. (
+                                        0       ; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        NS      cs1.skills.com.
+        NS      cs2.skills.com.
+1       PTR     cs1.skills.com. #PTR记录
+2       PTR     cs2.skills.com.
+3       PTR     cs3.skills.com.
+4       PTR     cs4.skills.com.
+5       PTR     cs5.skills.com.
+6       PTR     cs6.skills.com.
+7       PTR     cs7.skills.com.
 </code></pre>
-<p>为PowerShell配置相关快捷键<br>:::info<br>配置文件$Profile<br>:::</p>
-<pre><code># PSReadLine配置
-Set-PSReadLineOption -PredictionSource History # 设置预测文本来源为历史记录
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd # 选择历史命令时，光标移动到末尾
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete # 设置 Tab 为菜单补全和 Intellisense
-Set-PSReadLineKeyHandler -Key "Ctrl+z" -Function Undo # 设置 Ctrl+z 为撤销
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward # 设置向上键为后向搜索历史记录
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward # 设置向下键为前向搜索历史纪录
-Set-PsReadLineKeyHandler -key "Ctrl+Shift+a" -Function BeginningOfLine # 将光标移动到行首
-Set-PsReadLineKeyHandler -key "Ctrl+a" -Function BackwardWord # 向前移动一个单词
-# 将光标移动到行尾，并能补全历史命令
-Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+e" -ScriptBlock {
-    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()
-    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
-}
-Set-PsReadLineKeyHandler -key "Ctrl+e" -Function ForwardWord # 向后移动一个单词
-# 定义颜色
-Set-PSReadLineOption -Colors @{
-  Command            = 'Magenta'
-  Number             = 'DarkBlue'
-  Member             = 'DarkBlue'
-  Operator           = 'DarkBlue'
-  Type               = 'DarkBlue'
-  Variable           = 'DarkGreen'
-  Parameter          = 'DarkGreen'
-  ContinuationPrompt = 'DarkBlue'
-  Default            = 'DarkBlue'
-  InlinePrediction   = 'DarkGray'
-}
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><h3 id="在主机上生成rsa密钥对"><a href="#在主机上生成rsa密钥对" class="headerlink" title="在主机上生成rsa密钥对"></a>在主机上生成rsa密钥对</h3><pre><code>ssh-keygen -t rsa
 </code></pre>
-<h4 id="which-和-touch"><a href="#which-和-touch" class="headerlink" title="which 和 touch"></a>which 和 touch</h4><p>在command_profile.ps1中添加</p>
-<pre><code># which 和 touch
-function which ($command) {
-  Get-Command -Name $command -ErrorAction SilentlyContinue |
-    Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
-}
-function touch($name){
-  if ($name) {
-    $file_path = Split-Path -Path $name
-    $file_name = Split-Path -Path $name -Leaf
-    if ($file_path -eq "") {
-      $file_path = "."
-    }
-    if (-Not (Test-Path($file_path))) {
-      New-Item -ItemType "directory" -Path $file_path
-    }
-    New-Item -Path $file_path -Name $file_name -ItemType "file"
-  }
-  else {
-     Write-Host "Command to create new file."
-  }
-}
+<h3 id="将生成的公钥互相传递"><a href="#将生成的公钥互相传递" class="headerlink" title="将生成的公钥互相传递"></a>将生成的公钥互相传递</h3><pre><code>ssh-copy-id root@ip
 </code></pre>
-<h2 id="scoop"><a href="#scoop" class="headerlink" title="scoop"></a>scoop</h2><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><pre><code># 一键安装scoop
-Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-
-# 如果执行出错就是用这条命令后，再执行上一条命令
-Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+<h2 id="CA-服务器"><a href="#CA-服务器" class="headerlink" title="CA 服务器"></a>CA 服务器</h2><h3 id="手动创建必须的目录和文件"><a href="#手动创建必须的目录和文件" class="headerlink" title="手动创建必须的目录和文件"></a>手动创建必须的目录和文件</h3><pre><code>mkdir -p /etc/pki/CA
+cd /etc/pki/CA
+mkdir certs,crl,newcerts,private
+touch index.txt #证书的索引数据库文件
+echo 01 &gt;serial #存放每个证书的编号文件
 </code></pre>
-<p><strong>帮助文档</strong><br>&lt;<a target="_blank" rel="noopener" href="https://scoop-docs.vercel.app/">https://scoop-docs.vercel.app/</a>&gt;</p>
-<h2 id="系统环境配置"><a href="#系统环境配置" class="headerlink" title="系统环境配置"></a>系统环境配置</h2><h4 id="python3、python2-7"><a href="#python3、python2-7" class="headerlink" title="python3、python2.7"></a>python3、python2.7</h4><pre><code># 添加versions软件源
-scoop bucket add versions
-
-# 安装python
-scoop install python python27
-
-# 多版本切换
-scoop reset 想要使用的版本
+<h3 id="生成CA的私钥"><a href="#生成CA的私钥" class="headerlink" title="生成CA的私钥"></a>生成CA的私钥</h3><pre><code>(umask 077;openssl genrsa -out private/cakey.pem 2048)
 </code></pre>
-<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><pre><code># 安装neovim
-scoop install neovim
+<h3 id="生成自签名的CA证书（公钥）"><a href="#生成自签名的CA证书（公钥）" class="headerlink" title="生成自签名的CA证书（公钥）"></a>生成自签名的CA证书（公钥）</h3><pre><code>openssl req -new -x509 -key private/cakey.pem -out cacert.pem -days 7300
 </code></pre>
-<p>neovim扩展<br>&lt;<a target="_blank" rel="noopener" href="https://neovimcraft.com/">https://neovimcraft.com/</a>&gt;</p>
-<h4 id="安装neovide"><a href="#安装neovide" class="headerlink" title="安装neovide"></a>安装neovide</h4><pre><code># 必须要有extras软件库
-scoop install neovide
-</code></pre>
-<h4 id="LunarVim"><a href="#LunarVim" class="headerlink" title="LunarVim"></a>LunarVim</h4><h5 id="安装PowerShell-7-2"><a href="#安装PowerShell-7-2" class="headerlink" title="安装PowerShell 7.2"></a>安装PowerShell 7.2</h5><p>&lt;[<a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on%02windows?view=powershell-7.2%5D(https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on%02windows?view=powershell-7.2)>">https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-onwindows?view=powershell-7.2](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-onwindows?view=powershell-7.2)&gt;</a></p>
-<h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h5><pre><code>scoop install nodejs
-scoop install python
-scoop install gcc
-</code></pre>
-<p>更换Python 和 NPM 源<br>Python<br>豆瓣源</p>
-<pre><code>pip config set global.index-url https://pypi.douban.com/simple/
-</code></pre>
-<p>Python with HTTP<br>豆瓣源</p>
-<pre><code>pip config set global.index-url http://pypi.douban.com/simple/
-pip config set install.trusted-host pypi.douban.com
-</code></pre>
-<p>NPM<br>淘宝源</p>
-<pre><code>npm config set registry https://registry.npm.taobao.org
-</code></pre>
-<h5 id="安装-LunarVim"><a href="#安装-LunarVim" class="headerlink" title="安装 LunarVim"></a>安装 LunarVim</h5><pre><code>Invoke-WebRequest\
-https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/inst\
-all.ps1 -UseBasicParsing | Invoke-Expression
-</code></pre>
-<p>根据需求选择完毕后<br>输入 lvim 进入 LunarVim 使用 :PackerSync 安装插件</p>
-<h5 id="NeoVide-结合-LunarVim"><a href="#NeoVide-结合-LunarVim" class="headerlink" title="NeoVide 结合 LunarVim"></a>NeoVide 结合 LunarVim</h5><p>创建可执行文件<br>添加 ~/.local/bin 到环境变量 $PATH 中<br>进入 ~/.local/bin<br>将 lvim.ps1 复制为 lvide.ps1</p>
-<pre><code>cp lvim.ps1 lvide.ps1
-</code></pre>
-<p>编辑 lvide.ps1<br>将最后的一行代码替换成为</p>
-<pre><code>neovide -- -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" @args
-</code></pre>
-<p>创建快捷方式<br> 进入 C:\Users$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs 中 右键添加快捷方式，为 C:\Program Files\PowerShell\7\pwsh.exe 添加快捷方式<br>命名为 Lvide<br>编辑 Lvide 属性<br>在目标路径更改为 “C:\Users%UserName%.local\bin\lvide.ps1”<br>设置起始位为 “C:\Users%UserName%\OneDrive\Desktop”<br>设置快捷键为 “Shift + Alt + P”<br>更改图标为 NeoVIM 的图标 “%USERPROFILE%\scoop\apps\neovim\current\bin\nvim-qt.exe”</p>
-<h5 id="设置LunarVim字体"><a href="#设置LunarVim字体" class="headerlink" title="设置LunarVim字体"></a>设置LunarVim字体</h5><p>编辑LunarVim 配置文件 “C:\Users%UserName%\AppData\Local\lvim\config.lua”<br>添加 vim.o.guifont = “Hack NF” 配置字体</p>
-<h5 id="为命令配置文件添加"><a href="#为命令配置文件添加" class="headerlink" title="为命令配置文件添加"></a>为命令配置文件添加</h5><pre><code>Set-Alias lvim C:\Users\31438\.local\bin\lvim.ps1
-Set-Alias lvide C:\Users\31438\.local\bin\lvide.ps1
-</code></pre>
-<h2 id="wsl2"><a href="#wsl2" class="headerlink" title="wsl2"></a>wsl2</h2><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p>win键搜索 Windows Features打开 适用于linux的windows子系统 和 Hyper-V 和 虚拟机平台 然后重启电脑<br>使用微软商店安装 ubuntu 22.04即可</p>
-<h4 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h4><p>在 设置 -&gt; 应用 -&gt; 应用和功能 -&gt; linux发行版 -&gt; 移动</p>
-<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><h5 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h5><pre><code># 打开源文件
-sudo vim /etc/apt/sources.list
-
-# 替换成阿里源
-deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
-</code></pre>
-<h5 id="apache2"><a href="#apache2" class="headerlink" title="apache2"></a>apache2</h5><pre><code># 安装apache2
-sudo apt install apache2
-
-# 开启服务
-sudo service apache2 start
-
-# 测试
-curl 127.0.0.1
-</code></pre>
-<h5 id="php"><a href="#php" class="headerlink" title="php"></a>php</h5><pre><code># 安装php
-sudo apt install php libapache2-mod-php
-</code></pre>
-<h5 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h5><pre><code># 安装Mysql
-sudo apt install mysql-server
-</code></pre>
-<h5 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h5><pre><code># 运行保护mysql的脚本
-sudo mysql_secure_installation
-# 登录
-sudo mysql -u root
-
-# 创建用户
-mysql&gt; CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
-
-# 赋予权限
-mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 为全部) TO 'username'@'localhost' WITH GRANT OPTION;
+<p>Country Name (2 letter code) [XX]:CN</p>
+<p>State or Province Name (full name) []:Beijing</p>
+<p>Locality Name (eg, city) [Default City]:Beijing</p>
+<p>Organization Name (eg, company) [Default Company Ltd]:skills</p>
+<p>Organizational Unit Name (eg, section) []:system</p>
+<p>Common Name (eg, your name or your server’s hostname) []:cs1.skills.com</p>
+<p>Email Address []:</p>
+<h3 id="验证命令"><a href="#验证命令" class="headerlink" title="验证命令"></a>验证命令</h3><pre><code>[root@cs1 CA]# date
+[root@cs1 CA]# openssl x509 -in /etc/pki/CA/cacert.pem -noout -subject -issuer -enddate
 </code></pre>
 
                 
@@ -590,7 +556,7 @@ mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/">http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/</a>
+                    <a href="http://emyia2001.github.io/2022/11/03/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">http://emyia2001.github.io/2022/11/03/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -628,8 +594,8 @@ mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-                                    <span class="chip bg-color">开发环境</span>
+                                <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">
+                                    <span class="chip bg-color">服务搭建</span>
                                 </a>
                             
                         </div>
@@ -679,24 +645,24 @@ mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/">
+                <a href="/2023/06/21/helloshark/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="流量里的二维码">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="helloshark">
                         
-                        <span class="card-title">流量里的二维码</span>
+                        <span class="card-title">helloshark</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MISC
+                            一道脑洞有点离谱MISC
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-21
                         </span>
                         <span class="publish-author">
                             
@@ -732,34 +698,34 @@ mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/">
+                <a href="/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="一个密码">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="PNG图片转换器">
                         
-                        <span class="card-title">一个密码</span>
+                        <span class="card-title">PNG图片转换器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MISC
+                            WEB
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/MISC/" class="post-category">
-                                    MISC
+                            <a href="/categories/WEB/" class="post-category">
+                                    WEB
                                 </a>
                             
-                            <a href="/categories/MISC/CTF/" class="post-category">
+                            <a href="/categories/WEB/CTF/" class="post-category">
                                     CTF
                                 </a>
                             
