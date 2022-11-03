@@ -3,11 +3,11 @@
   <title>Snark&#39;s blog</title>
   
   <subtitle>相逢的人会再相逢</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://emyia2001.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2022-11-02T09:48:47.464Z</updated>
-  <id>http://example.com/</id>
+  <link href="http://emyia2001.github.io/"/>
+  <updated>2022-11-02T13:32:57.063Z</updated>
+  <id>http://emyia2001.github.io/</id>
   
   <author>
     <name>Snark</name>
@@ -17,150 +17,198 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>c2nu</title>
-    <link href="http://example.com/2022/10/21/c2nu/"/>
-    <id>http://example.com/2022/10/21/c2nu/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T09:48:47.464Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;下载附件是个word文档，打开提示我们flag不在这里&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/c2nu/1.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>bilibili</title>
-    <link href="http://example.com/2022/10/21/bilibili/"/>
-    <id>http://example.com/2022/10/21/bilibili/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T09:10:05.762Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
-&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
     <title>helloshark</title>
-    <link href="http://example.com/2022/10/21/helloshark/"/>
-    <id>http://example.com/2022/10/21/helloshark/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T08:24:54.057Z</updated>
+    <link href="http://emyia2001.github.io/2023/06/21/helloshark/"/>
+    <id>http://emyia2001.github.io/2023/06/21/helloshark/</id>
+    <published>2023-06-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:32:57.063Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><p>首先下载附件</p><p>解压后发现是个.bmp的图片，直接拖进kali用foremost分离，但是我这里是用的7z直接就点开了</p><p><img src="/images/helloshark/1.png"></p><p>打开后发现需要解压密码，根据他的提示可知解压密码就在我们之前那个.bmp图片里</p><p>这里用zsteg这个工具分析这个图片</p><p><img src="/images/helloshark/2.png"></p><p>发现有个password，应该就是解压密码</p><p><img src="/images/helloshark/3.png"></p><p>解压出来后直接看流量包，跟踪TCP流，最终找到一条比较可疑的数据流</p><p><img src="/images/helloshark/4.png"></p><p>多观察发现这一列有一串flag的字样</p><p><img src="/images/helloshark/5.png"></p><p>最终拼接出来就是flag的基本格式的样子，提交，完成</p><p><img src="/images/helloshark/6.png"></p>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;p&gt;首先下载附件&lt;/p&gt;
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;首先下载附件&lt;/p&gt;
 &lt;p&gt;解压后发现是个.bmp的图片，直接拖进kali用foremost分离，但是我这里是用的7z直接就点开了&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
+&lt;p&gt;&lt;img src=&quot;/images/helloshark/1.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;打开后发现需要</summary>
       
     
     
     
     
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>PNG图片转换器</title>
-    <link href="http://example.com/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
-    <id>http://example.com/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
+    <link href="http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
+    <id>http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
     <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T09:10:14.740Z</updated>
+    <updated>2022-11-02T13:32:46.352Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p><p><img src="/images/blog/1.png"></p><h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p><p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p><p><img src="/images/blog/2.1.png"></p><p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p><p>原理见：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/Xxy605/article/details/120373095</span><br></pre></td></tr></tbody></table></figure><p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p><p><img src="/images/blog/2.2.png" alt="2.2"></p><p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p><p><img src="/./images/blog/2.3.png" alt="2.3"></p><p>读取该png，内容解码发现了flag</p><p><img src="/./images/blog/2.4.png" alt="2.4"></p><p><img src="/./images/blog/2.5.png" alt="2.5"></p><p>一样的方法用cat读取</p><p><img src="/./images/blog/2.6.png" alt="2.6"></p><p><img src="/./images/blog/2.7.png" alt="2.7"></p><p><img src="/./images/blog/2.8.png" alt="2.8"></p><p>base解码就可以得到flag</p>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
-&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot;</summary>
-        
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
+&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot; cl</summary>
       
     
     
     
     
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
     
   </entry>
   
   <entry>
-    <title>一个密码</title>
-    <link href="http://example.com/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/"/>
-    <id>http://example.com/2022/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/</id>
+    <title>WSL安装与卸载</title>
+    <link href="http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
+    <id>http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</id>
     <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T09:10:09.339Z</updated>
+    <updated>2022-11-02T14:06:28.985Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br></pre></td></tr></tbody></table></figure><p>重启后以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br></pre></td></tr></tbody></table></figure><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y kali-win-kex</span><br></pre></td></tr></tbody></table></figure><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --win-s</span><br></pre></td></tr></tbody></table></figure><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --esm --ip -s</span><br></pre></td></tr></tbody></table></figure><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --sl -s</span><br></pre></td></tr></tbody></table></figure><p>工具包</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y kali-linux-large</span><br></pre></td></tr></tbody></table></figure><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wslconfig /l</span><br><span class="line"># 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令</span><br><span class="line">wslconfig /u Ubuntu</span><br></pre></td></tr></tbody></table></figure>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;p&gt;下载文件后打开发现是一堆数字，多次测试发现是八进制，转码可得&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
+    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3 id=&quot;在-WSL2-中安装-Kali-Linux&quot;&gt;&lt;a href=&quot;#在-WSL2-中安装-Kali-Lin</summary>
       
     
     
     
     
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>bilibili</title>
+    <link href="http://emyia2001.github.io/2022/10/21/bilibili/"/>
+    <id>http://emyia2001.github.io/2022/10/21/bilibili/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:33:20.415Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><p>首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整</p><p>打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件</p><p><img src="/images/bilibili/1.png"></p><p>这里我用7z能直接打开bmp的文件得到flag.txt</p><p><img src="/images/bilibili/2.png"></p><p><img src="/images/bilibili/3.png"></p><p>有%，猜测是url编码，解码得</p><p><img src="/images/bilibili/4.png"></p><p>有\u，是Unicode编码，解码得</p><p><img src="/images/bilibili/5.png"></p><p>至此得到一半的flag了，剩下的flag经过我一系列寻找最终在最开始的.bmp文件通过stegsolve工具找到</p><p><img src="/images/bilibili/6.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
+&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image</summary>
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>流量里的二维码</title>
-    <link href="http://example.com/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
-    <id>http://example.com/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</id>
+    <link href="http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+    <id>http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</id>
     <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T09:10:11.878Z</updated>
+    <updated>2022-11-02T13:33:32.854Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="流量里的二维码"><a href="#流量里的二维码" class="headerlink" title="流量里的二维码"></a>流量里的二维码</h1><p>打开流量包发现全是ICMP的包</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/1.png"></p><p>发现reply的数据中，ttl都是64，猜测request才是解题的关键，那就单独看request的数据</p><p>根据题目提示，要找出隐藏的二维码，所以优先考虑二进制数据，不过这里并没有找到，于是把目光放在ttl的值上。把所以的值看完了发现最大值不超过255，这更加验证了我们的想法</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/2.png"></p><p>这里我们用kali自带的工具tshark把我们想要的数据提取出来</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r wireshark.pcap -Y "ip.src == 172.17.0.3" -T fields -e "ip.ttl" &gt; 1.txt</span><br></pre></td></tr></tbody></table></figure><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/3.png"></p><p>写脚本把每一行的数据都转为八位的二进制</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/4.png"></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">f=open("1.txt","r")</span><br><span class="line">MAX = 22  #图片边长</span><br><span class="line">img = Image.new("RGB",(MAX,MAX))</span><br><span class="line">str=""</span><br><span class="line"></span><br><span class="line">for line in f.readlines():</span><br><span class="line">    line=line.replace("\n","")</span><br><span class="line">    str += bin(int(line))[2:].zfill(8)</span><br><span class="line"></span><br><span class="line">str=str[:-4]</span><br><span class="line">i = 0</span><br><span class="line">for y in range (0,MAX):</span><br><span class="line">    for x in range (0,MAX):</span><br><span class="line">        if(str[i] == '1'):</span><br><span class="line">            img.putpixel([x,y],(0, 0, 0))</span><br><span class="line">        else:</span><br><span class="line">            img.putpixel([x,y],(255,255,255))</span><br><span class="line">        i = i+1</span><br><span class="line">img.show()</span><br><span class="line">img.save("flag.png")</span><br></pre></td></tr></tbody></table></figure><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/5.png"></p><p>扫出来就是flag{ttleasy}</p><p>参考地址：<a href="https://blog.csdn.net/weixin_45696568/article/details/111413521">https://blog.csdn.net/weixin_45696568/article/details/111413521</a></p>]]></content>
     
     
       
       
-        
-        
-    <summary type="html">&lt;h1 id=&quot;流量里的二维码&quot;&gt;&lt;a href=&quot;#流量里的二维码&quot; class=&quot;headerlink&quot; title=&quot;流量里的二维码&quot;&gt;&lt;/a&gt;流量里的二维码&lt;/h1&gt;&lt;p&gt;打开流量包发现全是ICMP的包&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;流量里的二维码&quot;&gt;&lt;a href=&quot;#流量里的二维码&quot; class=&quot;headerlink&quot; title=&quot;流量里的二维码&quot;&gt;&lt;/a&gt;流量里的二维码&lt;/h1&gt;&lt;p&gt;打开流量包发现全是ICMP的包&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/ima</summary>
       
     
     
     
     
-    <category term="CTF" scheme="http://example.com/tags/CTF/"/>
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>c2nu</title>
+    <link href="http://emyia2001.github.io/2022/10/21/c2nu/"/>
+    <id>http://emyia2001.github.io/2022/10/21/c2nu/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:33:11.840Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><p>下载附件是个word文档，打开提示我们flag不在这里</p><p><img src="/images/c2nu/1.png"></p><p>拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了</p><p><img src="/images/c2nu/2.png"></p><p>打开后在里面找到个flag.zip的文件，打开后发现需要密码，根据他的提示是弱口令密码，爆破得到密码是password</p><p><img src="/images/c2nu/3.png"></p><p>打开me}.txt文件发现里面是一串十六进制文件，我想到的是十六进制转文本(当然对数字敏感的就能直接发现这开头就是个png的格式)</p><p><img src="/images/c2nu/4.png"></p><p>看开头就知道是个png文件，复制粘贴进010保存为png图片</p><p><img src="/images/c2nu/5.png"></p><p><img src="/images/c2nu/6.png"></p><p>直接丢进stegsolve分析</p><p><img src="/images/c2nu/7.png"></p><p>得到前半截flag，与之前文件名的后半截拼接得到完整flag</p><p><img src="/images/c2nu/8.png"></p><p>flag{seeme}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;下载附件是个word文档，打开提示我们flag不在这里&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/c2nu/1.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了&lt;/p&gt;
+&lt;p&gt;&lt;img src=</summary>
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows开发配置</title>
+    <link href="http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"/>
+    <id>http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/</id>
+    <published>2022-06-02T13:13:00.000Z</published>
+    <updated>2022-11-02T13:32:36.617Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h2 id="powershell美化"><a href="#powershell美化" class="headerlink" title="powershell美化"></a>powershell美化</h2><h4 id="fzf文件搜索"><a href="#fzf文件搜索" class="headerlink" title="fzf文件搜索"></a>fzf文件搜索</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装fzf</span><br><span class="line">scoop install fzf</span><br></pre></td></tr></tbody></table></figure><h4 id="添加用户配置文件"><a href="#添加用户配置文件" class="headerlink" title="添加用户配置文件"></a>添加用户配置文件</h4><p>把user_profile.ps1、command_profile.ps1文件创建到 “用户目录.config\powershell” 下<br>使用$profile查看PowerShell配置文件，打开文件添加以下命令</p><h4 id="oh-my-posh"><a href="#oh-my-posh" class="headerlink" title="oh-my-posh"></a>oh-my-posh</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装oh-my-posh</span><br><span class="line">scoop install oh-my-posh</span><br><span class="line"></span><br><span class="line"># 在用户配置文件中添加</span><br><span class="line">oh-my-posh --init --shell pwsh --config C:\Users\31438\scoop\apps\oh-my-posh\current\themes\unicorn.omp.json | Invoke-Expression</span><br></pre></td></tr></tbody></table></figure><h4 id="Terminal-Icons"><a href="#Terminal-Icons" class="headerlink" title="Terminal-Icons"></a>Terminal-Icons</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装Terminal-Icons</span><br><span class="line">scoop install terminal-icons</span><br><span class="line"></span><br><span class="line"># 在用户配置文件下添加</span><br><span class="line">Import-Module -Name Terminal-Icons</span><br></pre></td></tr></tbody></table></figure><h4 id="posh-git"><a href="#posh-git" class="headerlink" title="posh-git"></a>posh-git</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装posh-git</span><br><span class="line">scoop install posh-git</span><br><span class="line"></span><br><span class="line"># 在用户配置文件下添加</span><br><span class="line">Import-Module posh-git</span><br></pre></td></tr></tbody></table></figure><h4 id="PSReadLine"><a href="#PSReadLine" class="headerlink" title="PSReadLine"></a>PSReadLine</h4><p>查看PSReadLine的全部函数</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-PSReadLineKeyHandler</span><br></pre></td></tr></tbody></table></figure><p>安装</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装PSReadLine</span><br><span class="line">Install-Module -Name PSReadLine -AllowPrerelease -Force</span><br></pre></td></tr></tbody></table></figure><p>为PowerShell配置相关快捷键<br>:::info<br>配置文件$Profile<br>:::</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># PSReadLine配置</span><br><span class="line">Set-PSReadLineOption -PredictionSource History # 设置预测文本来源为历史记录</span><br><span class="line">Set-PSReadLineOption -HistorySearchCursorMovesToEnd # 选择历史命令时，光标移动到末尾</span><br><span class="line">Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete # 设置 Tab 为菜单补全和 Intellisense</span><br><span class="line">Set-PSReadLineKeyHandler -Key "Ctrl+z" -Function Undo # 设置 Ctrl+z 为撤销</span><br><span class="line">Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward # 设置向上键为后向搜索历史记录</span><br><span class="line">Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward # 设置向下键为前向搜索历史纪录</span><br><span class="line">Set-PsReadLineKeyHandler -key "Ctrl+Shift+a" -Function BeginningOfLine # 将光标移动到行首</span><br><span class="line">Set-PsReadLineKeyHandler -key "Ctrl+a" -Function BackwardWord # 向前移动一个单词</span><br><span class="line"># 将光标移动到行尾，并能补全历史命令</span><br><span class="line">Set-PSReadLineKeyHandler -Chord "Ctrl+Shift+e" -ScriptBlock {</span><br><span class="line">    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()</span><br><span class="line">    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()</span><br><span class="line">}</span><br><span class="line">Set-PsReadLineKeyHandler -key "Ctrl+e" -Function ForwardWord # 向后移动一个单词</span><br><span class="line"># 定义颜色</span><br><span class="line">Set-PSReadLineOption -Colors @{</span><br><span class="line">  Command            = 'Magenta'</span><br><span class="line">  Number             = 'DarkBlue'</span><br><span class="line">  Member             = 'DarkBlue'</span><br><span class="line">  Operator           = 'DarkBlue'</span><br><span class="line">  Type               = 'DarkBlue'</span><br><span class="line">  Variable           = 'DarkGreen'</span><br><span class="line">  Parameter          = 'DarkGreen'</span><br><span class="line">  ContinuationPrompt = 'DarkBlue'</span><br><span class="line">  Default            = 'DarkBlue'</span><br><span class="line">  InlinePrediction   = 'DarkGray'</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><h4 id="which-和-touch"><a href="#which-和-touch" class="headerlink" title="which 和 touch"></a>which 和 touch</h4><p>在command_profile.ps1中添加</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># which 和 touch</span><br><span class="line">function which ($command) {</span><br><span class="line">  Get-Command -Name $command -ErrorAction SilentlyContinue |</span><br><span class="line">    Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue</span><br><span class="line">}</span><br><span class="line">function touch($name){</span><br><span class="line">  if ($name) {</span><br><span class="line">    $file_path = Split-Path -Path $name</span><br><span class="line">    $file_name = Split-Path -Path $name -Leaf</span><br><span class="line">    if ($file_path -eq "") {</span><br><span class="line">      $file_path = "."</span><br><span class="line">    }</span><br><span class="line">    if (-Not (Test-Path($file_path))) {</span><br><span class="line">      New-Item -ItemType "directory" -Path $file_path</span><br><span class="line">    }</span><br><span class="line">    New-Item -Path $file_path -Name $file_name -ItemType "file"</span><br><span class="line">  }</span><br><span class="line">  else {</span><br><span class="line">     Write-Host "Command to create new file."</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><h2 id="scoop"><a href="#scoop" class="headerlink" title="scoop"></a>scoop</h2><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 一键安装scoop</span><br><span class="line">Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')</span><br><span class="line"></span><br><span class="line"># 如果执行出错就是用这条命令后，再执行上一条命令</span><br><span class="line">Set-ExecutionPolicy RemoteSigned -scope CurrentUser</span><br></pre></td></tr></tbody></table></figure><p><strong>帮助文档</strong><br>&lt;<a href="https://scoop-docs.vercel.app/">https://scoop-docs.vercel.app/</a>&gt;</p><h2 id="系统环境配置"><a href="#系统环境配置" class="headerlink" title="系统环境配置"></a>系统环境配置</h2><h4 id="python3、python2-7"><a href="#python3、python2-7" class="headerlink" title="python3、python2.7"></a>python3、python2.7</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 添加versions软件源</span><br><span class="line">scoop bucket add versions</span><br><span class="line"></span><br><span class="line"># 安装python</span><br><span class="line">scoop install python python27</span><br><span class="line"></span><br><span class="line"># 多版本切换</span><br><span class="line">scoop reset 想要使用的版本</span><br></pre></td></tr></tbody></table></figure><h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装neovim</span><br><span class="line">scoop install neovim</span><br></pre></td></tr></tbody></table></figure><p>neovim扩展<br>&lt;<a href="https://neovimcraft.com/">https://neovimcraft.com/</a>&gt;</p><h4 id="安装neovide"><a href="#安装neovide" class="headerlink" title="安装neovide"></a>安装neovide</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 必须要有extras软件库</span><br><span class="line">scoop install neovide</span><br></pre></td></tr></tbody></table></figure><h4 id="LunarVim"><a href="#LunarVim" class="headerlink" title="LunarVim"></a>LunarVim</h4><h5 id="安装PowerShell-7-2"><a href="#安装PowerShell-7-2" class="headerlink" title="安装PowerShell 7.2"></a>安装PowerShell 7.2</h5><p>&lt;[<a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on%02windows?view=powershell-7.2%5D(https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on%02windows?view=powershell-7.2)>">https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-onwindows?view=powershell-7.2](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-onwindows?view=powershell-7.2)&gt;</a></p><h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scoop install nodejs</span><br><span class="line">scoop install python</span><br><span class="line">scoop install gcc</span><br></pre></td></tr></tbody></table></figure><p>更换Python 和 NPM 源<br>Python<br>豆瓣源</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.index-url https://pypi.douban.com/simple/</span><br></pre></td></tr></tbody></table></figure><p>Python with HTTP<br>豆瓣源</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.index-url http://pypi.douban.com/simple/</span><br><span class="line">pip config set install.trusted-host pypi.douban.com</span><br></pre></td></tr></tbody></table></figure><p>NPM<br>淘宝源</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></tbody></table></figure><h5 id="安装-LunarVim"><a href="#安装-LunarVim" class="headerlink" title="安装 LunarVim"></a>安装 LunarVim</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Invoke-WebRequest\</span><br><span class="line">https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/inst\</span><br><span class="line">all.ps1 -UseBasicParsing | Invoke-Expression</span><br></pre></td></tr></tbody></table></figure><p>根据需求选择完毕后<br>输入 lvim 进入 LunarVim 使用 :PackerSync 安装插件</p><h5 id="NeoVide-结合-LunarVim"><a href="#NeoVide-结合-LunarVim" class="headerlink" title="NeoVide 结合 LunarVim"></a>NeoVide 结合 LunarVim</h5><p>创建可执行文件<br>添加 ~/.local/bin 到环境变量 $PATH 中<br>进入 ~/.local/bin<br>将 lvim.ps1 复制为 lvide.ps1</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp lvim.ps1 lvide.ps1</span><br></pre></td></tr></tbody></table></figure><p>编辑 lvide.ps1<br>将最后的一行代码替换成为</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">neovide -- -u "$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua" @args</span><br></pre></td></tr></tbody></table></figure><p>创建快捷方式<br> 进入 C:\Users$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs 中 右键添加快捷方式，为 C:\Program Files\PowerShell\7\pwsh.exe 添加快捷方式<br>命名为 Lvide<br>编辑 Lvide 属性<br>在目标路径更改为 “C:\Users%UserName%.local\bin\lvide.ps1”<br>设置起始位为 “C:\Users%UserName%\OneDrive\Desktop”<br>设置快捷键为 “Shift + Alt + P”<br>更改图标为 NeoVIM 的图标 “%USERPROFILE%\scoop\apps\neovim\current\bin\nvim-qt.exe”</p><h5 id="设置LunarVim字体"><a href="#设置LunarVim字体" class="headerlink" title="设置LunarVim字体"></a>设置LunarVim字体</h5><p>编辑LunarVim 配置文件 “C:\Users%UserName%\AppData\Local\lvim\config.lua”<br>添加 vim.o.guifont = “Hack NF” 配置字体</p><h5 id="为命令配置文件添加"><a href="#为命令配置文件添加" class="headerlink" title="为命令配置文件添加"></a>为命令配置文件添加</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set-Alias lvim C:\Users\31438\.local\bin\lvim.ps1</span><br><span class="line">Set-Alias lvide C:\Users\31438\.local\bin\lvide.ps1</span><br></pre></td></tr></tbody></table></figure><h2 id="wsl2"><a href="#wsl2" class="headerlink" title="wsl2"></a>wsl2</h2><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p>win键搜索 Windows Features打开 适用于linux的windows子系统 和 Hyper-V 和 虚拟机平台 然后重启电脑<br>使用微软商店安装 ubuntu 22.04即可</p><h4 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h4><p>在 设置 -&gt; 应用 -&gt; 应用和功能 -&gt; linux发行版 -&gt; 移动</p><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><h5 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 打开源文件</span><br><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"># 替换成阿里源</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse</span><br></pre></td></tr></tbody></table></figure><h5 id="apache2"><a href="#apache2" class="headerlink" title="apache2"></a>apache2</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 安装apache2</span><br><span class="line">sudo apt install apache2</span><br><span class="line"></span><br><span class="line"># 开启服务</span><br><span class="line">sudo service apache2 start</span><br><span class="line"></span><br><span class="line"># 测试</span><br><span class="line">curl 127.0.0.1</span><br></pre></td></tr></tbody></table></figure><h5 id="php"><a href="#php" class="headerlink" title="php"></a>php</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装php</span><br><span class="line">sudo apt install php libapache2-mod-php</span><br></pre></td></tr></tbody></table></figure><h5 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装Mysql</span><br><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></tbody></table></figure><h5 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 运行保护mysql的脚本</span><br><span class="line">sudo mysql_secure_installation</span><br><span class="line"># 登录</span><br><span class="line">sudo mysql -u root</span><br><span class="line"></span><br><span class="line"># 创建用户</span><br><span class="line">mysql&gt; CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';</span><br><span class="line"></span><br><span class="line"># 赋予权限</span><br><span class="line">mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 为全部) TO 'username'@'localhost' WITH GRANT OPTION;</span><br></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h2 id=&quot;powershell美化&quot;&gt;&lt;a href=&quot;#powershell美化&quot; class=&quot;headerlink&quot; title=&quot;powershell美化&quot;&gt;&lt;/a&gt;powershell美化&lt;/h2&gt;&lt;h4 id=&quot;fzf文件搜索&quot;&gt;&lt;a </summary>
+      
+    
+    
+    
+    
+    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一个密码</title>
+    <link href="http://emyia2001.github.io/2021/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/"/>
+    <id>http://emyia2001.github.io/2021/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/</id>
+    <published>2021-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:33:27.298Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><p>下载文件后打开发现是一堆数字，多次测试发现是八进制，转码可得</p><p><img src="/images/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/1.png"></p><p>得到的字符串应该是base加密，再解码可得flag</p><p><img src="/images/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/2.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;下载文件后打开发现是一堆数字，多次测试发现是八进制，转码可得&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/1.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;得到的字符串应该是base加密，</summary>
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
     
   </entry>
   
