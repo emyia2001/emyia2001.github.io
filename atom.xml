@@ -115,30 +115,6 @@
   </entry>
   
   <entry>
-    <title>流量里的二维码</title>
-    <link href="http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
-    <id>http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T13:33:32.854Z</updated>
-    
-    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="流量里的二维码"><a href="#流量里的二维码" class="headerlink" title="流量里的二维码"></a>流量里的二维码</h1><p>打开流量包发现全是ICMP的包</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/1.png"></p><p>发现reply的数据中，ttl都是64，猜测request才是解题的关键，那就单独看request的数据</p><p>根据题目提示，要找出隐藏的二维码，所以优先考虑二进制数据，不过这里并没有找到，于是把目光放在ttl的值上。把所以的值看完了发现最大值不超过255，这更加验证了我们的想法</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/2.png"></p><p>这里我们用kali自带的工具tshark把我们想要的数据提取出来</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r wireshark.pcap -Y "ip.src == 172.17.0.3" -T fields -e "ip.ttl" &gt; 1.txt</span><br></pre></td></tr></tbody></table></figure><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/3.png"></p><p>写脚本把每一行的数据都转为八位的二进制</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/4.png"></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">f=open("1.txt","r")</span><br><span class="line">MAX = 22  #图片边长</span><br><span class="line">img = Image.new("RGB",(MAX,MAX))</span><br><span class="line">str=""</span><br><span class="line"></span><br><span class="line">for line in f.readlines():</span><br><span class="line">    line=line.replace("\n","")</span><br><span class="line">    str += bin(int(line))[2:].zfill(8)</span><br><span class="line"></span><br><span class="line">str=str[:-4]</span><br><span class="line">i = 0</span><br><span class="line">for y in range (0,MAX):</span><br><span class="line">    for x in range (0,MAX):</span><br><span class="line">        if(str[i] == '1'):</span><br><span class="line">            img.putpixel([x,y],(0, 0, 0))</span><br><span class="line">        else:</span><br><span class="line">            img.putpixel([x,y],(255,255,255))</span><br><span class="line">        i = i+1</span><br><span class="line">img.show()</span><br><span class="line">img.save("flag.png")</span><br></pre></td></tr></tbody></table></figure><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/5.png"></p><p>扫出来就是flag{ttleasy}</p><p>参考地址：<a href="https://blog.csdn.net/weixin_45696568/article/details/111413521">https://blog.csdn.net/weixin_45696568/article/details/111413521</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&quot;流量里的二维码&quot;&gt;&lt;a href=&quot;#流量里的二维码&quot; class=&quot;headerlink&quot; title=&quot;流量里的二维码&quot;&gt;&lt;/a&gt;流量里的二维码&lt;/h1&gt;&lt;p&gt;打开流量包发现全是ICMP的包&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/ima</summary>
-      
-    
-    
-    
-    
-    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
     <title>c2nu</title>
     <link href="http://emyia2001.github.io/2022/10/21/c2nu/"/>
     <id>http://emyia2001.github.io/2022/10/21/c2nu/</id>
@@ -155,6 +131,30 @@
 &lt;p&gt;&lt;img src=&quot;/images/c2nu/1.png&quot;&gt;&lt;/p&gt;
 &lt;p&gt;拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了&lt;/p&gt;
 &lt;p&gt;&lt;img src=</summary>
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>流量里的二维码</title>
+    <link href="http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
+    <id>http://emyia2001.github.io/2022/10/21/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:33:32.854Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="流量里的二维码"><a href="#流量里的二维码" class="headerlink" title="流量里的二维码"></a>流量里的二维码</h1><p>打开流量包发现全是ICMP的包</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/1.png"></p><p>发现reply的数据中，ttl都是64，猜测request才是解题的关键，那就单独看request的数据</p><p>根据题目提示，要找出隐藏的二维码，所以优先考虑二进制数据，不过这里并没有找到，于是把目光放在ttl的值上。把所以的值看完了发现最大值不超过255，这更加验证了我们的想法</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/2.png"></p><p>这里我们用kali自带的工具tshark把我们想要的数据提取出来</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tshark -r wireshark.pcap -Y "ip.src == 172.17.0.3" -T fields -e "ip.ttl" &gt; 1.txt</span><br></pre></td></tr></tbody></table></figure><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/3.png"></p><p>写脚本把每一行的数据都转为八位的二进制</p><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/4.png"></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">f=open("1.txt","r")</span><br><span class="line">MAX = 22  #图片边长</span><br><span class="line">img = Image.new("RGB",(MAX,MAX))</span><br><span class="line">str=""</span><br><span class="line"></span><br><span class="line">for line in f.readlines():</span><br><span class="line">    line=line.replace("\n","")</span><br><span class="line">    str += bin(int(line))[2:].zfill(8)</span><br><span class="line"></span><br><span class="line">str=str[:-4]</span><br><span class="line">i = 0</span><br><span class="line">for y in range (0,MAX):</span><br><span class="line">    for x in range (0,MAX):</span><br><span class="line">        if(str[i] == '1'):</span><br><span class="line">            img.putpixel([x,y],(0, 0, 0))</span><br><span class="line">        else:</span><br><span class="line">            img.putpixel([x,y],(255,255,255))</span><br><span class="line">        i = i+1</span><br><span class="line">img.show()</span><br><span class="line">img.save("flag.png")</span><br></pre></td></tr></tbody></table></figure><p><img src="/images/%E6%B5%81%E9%87%8F%E9%87%8C%E7%9A%84%E4%BA%8C%E7%BB%B4%E7%A0%81/5.png"></p><p>扫出来就是flag{ttleasy}</p><p>参考地址：<a href="https://blog.csdn.net/weixin_45696568/article/details/111413521">https://blog.csdn.net/weixin_45696568/article/details/111413521</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;流量里的二维码&quot;&gt;&lt;a href=&quot;#流量里的二维码&quot; class=&quot;headerlink&quot; title=&quot;流量里的二维码&quot;&gt;&lt;/a&gt;流量里的二维码&lt;/h1&gt;&lt;p&gt;打开流量包发现全是ICMP的包&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/ima</summary>
       
     
     
