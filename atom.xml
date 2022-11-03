@@ -43,20 +43,21 @@
   </entry>
   
   <entry>
-    <title>PNG图片转换器</title>
-    <link href="http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
-    <id>http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
+    <title>bilibili</title>
+    <link href="http://emyia2001.github.io/2022/10/21/bilibili/"/>
+    <id>http://emyia2001.github.io/2022/10/21/bilibili/</id>
     <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T13:32:46.352Z</updated>
+    <updated>2022-11-02T13:33:20.415Z</updated>
     
-    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p><p><img src="/images/blog/1.png"></p><h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p><p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p><p><img src="/images/blog/2.1.png"></p><p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p><p>原理见：</p><pre><code>https://blog.csdn.net/Xxy605/article/details/120373095</code></pre><p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p><p><img src="/images/blog/2.2.png" alt="2.2"></p><p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p><p><img src="/./images/blog/2.3.png" alt="2.3"></p><p>读取该png，内容解码发现了flag</p><p><img src="/./images/blog/2.4.png" alt="2.4"></p><p><img src="/./images/blog/2.5.png" alt="2.5"></p><p>一样的方法用cat读取</p><p><img src="/./images/blog/2.6.png" alt="2.6"></p><p><img src="/./images/blog/2.7.png" alt="2.7"></p><p><img src="/./images/blog/2.8.png" alt="2.8"></p><p>base解码就可以得到flag</p>]]></content>
+    <content type="html"><![CDATA[<p>[TOC]</p><p>首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整</p><p>打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件</p><p><img src="/images/bilibili/1.png"></p><p>这里我用7z能直接打开bmp的文件得到flag.txt</p><p><img src="/images/bilibili/2.png"></p><p><img src="/images/bilibili/3.png"></p><p>有%，猜测是url编码，解码得</p><p><img src="/images/bilibili/4.png"></p><p>有\u，是Unicode编码，解码得</p><p><img src="/images/bilibili/5.png"></p><p>至此得到一半的flag了，剩下的flag经过我一系列寻找最终在最开始的.bmp文件通过stegsolve工具找到</p><p><img src="/images/bilibili/6.png"></p>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
-&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot; cl</summary>
+&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
+&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/image</summary>
       
     
     
@@ -93,21 +94,20 @@
   </entry>
   
   <entry>
-    <title>bilibili</title>
-    <link href="http://emyia2001.github.io/2022/10/21/bilibili/"/>
-    <id>http://emyia2001.github.io/2022/10/21/bilibili/</id>
+    <title>PNG图片转换器</title>
+    <link href="http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
+    <id>http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
     <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T13:33:20.415Z</updated>
+    <updated>2022-11-02T13:32:46.352Z</updated>
     
-    <content type="html"><![CDATA[<p>[TOC]</p><p>首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整</p><p>打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件</p><p><img src="/images/bilibili/1.png"></p><p>这里我用7z能直接打开bmp的文件得到flag.txt</p><p><img src="/images/bilibili/2.png"></p><p><img src="/images/bilibili/3.png"></p><p>有%，猜测是url编码，解码得</p><p><img src="/images/bilibili/4.png"></p><p>有\u，是Unicode编码，解码得</p><p><img src="/images/bilibili/5.png"></p><p>至此得到一半的flag了，剩下的flag经过我一系列寻找最终在最开始的.bmp文件通过stegsolve工具找到</p><p><img src="/images/bilibili/6.png"></p>]]></content>
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p><p><img src="/images/blog/1.png"></p><h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p><p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p><p><img src="/images/blog/2.1.png"></p><p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p><p>原理见：</p><pre><code>https://blog.csdn.net/Xxy605/article/details/120373095</code></pre><p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p><p><img src="/images/blog/2.2.png" alt="2.2"></p><p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p><p><img src="/./images/blog/2.3.png" alt="2.3"></p><p>读取该png，内容解码发现了flag</p><p><img src="/./images/blog/2.4.png" alt="2.4"></p><p><img src="/./images/blog/2.5.png" alt="2.5"></p><p>一样的方法用cat读取</p><p><img src="/./images/blog/2.6.png" alt="2.6"></p><p><img src="/./images/blog/2.7.png" alt="2.7"></p><p><img src="/./images/blog/2.8.png" alt="2.8"></p><p>base解码就可以得到flag</p>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
-&lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/image</summary>
+&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
+&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot; cl</summary>
       
     
     
