@@ -67,6 +67,32 @@
   </entry>
   
   <entry>
+    <title>c2nu</title>
+    <link href="http://emyia2001.github.io/2022/10/21/c2nu/"/>
+    <id>http://emyia2001.github.io/2022/10/21/c2nu/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-02T13:33:11.840Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><p>下载附件是个word文档，打开提示我们flag不在这里</p><p><img src="/images/c2nu/1.png"></p><p>拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了</p><p><img src="/images/c2nu/2.png"></p><p>打开后在里面找到个flag.zip的文件，打开后发现需要密码，根据他的提示是弱口令密码，爆破得到密码是password</p><p><img src="/images/c2nu/3.png"></p><p>打开me}.txt文件发现里面是一串十六进制文件，我想到的是十六进制转文本(当然对数字敏感的就能直接发现这开头就是个png的格式)</p><p><img src="/images/c2nu/4.png"></p><p>看开头就知道是个png文件，复制粘贴进010保存为png图片</p><p><img src="/images/c2nu/5.png"></p><p><img src="/images/c2nu/6.png"></p><p>直接丢进stegsolve分析</p><p><img src="/images/c2nu/7.png"></p><p>得到前半截flag，与之前文件名的后半截拼接得到完整flag</p><p><img src="/images/c2nu/8.png"></p><p>flag{seeme}</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;p&gt;下载附件是个word文档，打开提示我们flag不在这里&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/c2nu/1.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了&lt;/p&gt;
+&lt;p&gt;&lt;img src=</summary>
+      
+    
+    
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>WSL安装与卸载</title>
     <link href="http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
     <id>http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</id>
@@ -105,32 +131,6 @@
 &lt;p&gt;首先下载附件压缩包，打开发现是一个.bmp的图片文件，bmp图片文件的优点是保存的信息很完整&lt;/p&gt;
 &lt;p&gt;打开图片发现没什么东西，直接放进kali用binwalk发现里面有一个flag.txt的文件&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/image</summary>
-      
-    
-    
-    
-    
-    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>c2nu</title>
-    <link href="http://emyia2001.github.io/2022/10/21/c2nu/"/>
-    <id>http://emyia2001.github.io/2022/10/21/c2nu/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-02T13:33:11.840Z</updated>
-    
-    <content type="html"><![CDATA[<p>[TOC]</p><p>下载附件是个word文档，打开提示我们flag不在这里</p><p><img src="/images/c2nu/1.png"></p><p>拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了</p><p><img src="/images/c2nu/2.png"></p><p>打开后在里面找到个flag.zip的文件，打开后发现需要密码，根据他的提示是弱口令密码，爆破得到密码是password</p><p><img src="/images/c2nu/3.png"></p><p>打开me}.txt文件发现里面是一串十六进制文件，我想到的是十六进制转文本(当然对数字敏感的就能直接发现这开头就是个png的格式)</p><p><img src="/images/c2nu/4.png"></p><p>看开头就知道是个png文件，复制粘贴进010保存为png图片</p><p><img src="/images/c2nu/5.png"></p><p><img src="/images/c2nu/6.png"></p><p>直接丢进stegsolve分析</p><p><img src="/images/c2nu/7.png"></p><p>得到前半截flag，与之前文件名的后半截拼接得到完整flag</p><p><img src="/images/c2nu/8.png"></p><p>flag{seeme}</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;p&gt;下载附件是个word文档，打开提示我们flag不在这里&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/c2nu/1.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;拖进010看看发现PK开头，所以是给zip文件，我们直接改后缀就完了&lt;/p&gt;
-&lt;p&gt;&lt;img src=</summary>
       
     
     
