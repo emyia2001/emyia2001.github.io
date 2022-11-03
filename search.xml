@@ -42,25 +42,6 @@
     
     
     <entry>
-      <title>WSL安装与卸载</title>
-      <link href="/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
-      <url>/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</url>
-      
-        <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br></pre></td></tr></tbody></table></figure><p>重启后以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br></pre></td></tr></tbody></table></figure><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y kali-win-kex</span><br></pre></td></tr></tbody></table></figure><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --win-s</span><br></pre></td></tr></tbody></table></figure><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --esm --ip -s</span><br></pre></td></tr></tbody></table></figure><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --sl -s</span><br></pre></td></tr></tbody></table></figure><p>工具包</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y kali-linux-large</span><br></pre></td></tr></tbody></table></figure><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wslconfig /l</span><br><span class="line"># 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令</span><br><span class="line">wslconfig /u Ubuntu</span><br></pre></td></tr></tbody></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 开发环境 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>bilibili</title>
       <link href="/2022/10/21/bilibili/"/>
       <url>/2022/10/21/bilibili/</url>
@@ -110,6 +91,25 @@
         <tags>
             
             <tag> CTF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>WSL安装与卸载</title>
+      <link href="/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
+      <url>/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</span><br></pre></td></tr></tbody></table></figure><p>重启后以管理员身份打开 PowerShell 并运行：</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br></pre></td></tr></tbody></table></figure><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install -y kali-win-kex</span><br></pre></td></tr></tbody></table></figure><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --win-s</span><br></pre></td></tr></tbody></table></figure><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --esm --ip -s</span><br></pre></td></tr></tbody></table></figure><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kex --sl -s</span><br></pre></td></tr></tbody></table></figure><p>工具包</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y kali-linux-large</span><br></pre></td></tr></tbody></table></figure><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wslconfig /l</span><br><span class="line"># 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令</span><br><span class="line">wslconfig /u Ubuntu</span><br></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 开发环境 </tag>
             
         </tags>
       
