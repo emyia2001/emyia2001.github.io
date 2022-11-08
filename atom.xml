@@ -45,6 +45,30 @@
   </entry>
   
   <entry>
+    <title>volatility常用命令</title>
+    <link href="http://emyia2001.github.io/2022/11/05/volatility/"/>
+    <id>http://emyia2001.github.io/2022/11/05/volatility/</id>
+    <published>2022-11-05T02:07:38.000Z</published>
+    <updated>2022-11-05T02:30:37.429Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="volatility"><a href="#volatility" class="headerlink" title="volatility"></a>volatility</h1><h1 id="一-工具的基本使用"><a href="#一-工具的基本使用" class="headerlink" title="一.   工具的基本使用"></a>一.   工具的基本使用</h1><h3 id="1-1-下载安装"><a href="#1-1-下载安装" class="headerlink" title="1.1  下载安装"></a>1.1  下载安装</h3><p>官网下载：<a href="https://www.volatilityfoundation.org/releases">https://www.volatilityfoundation.org/releases</a></p><p>github下载：</p><p>python2版本  <a href="https://github.com/volatilityfoundation/volatility">https://github.com/volatilityfoundation/volatility</a></p><p>python3版本 <a href="https://github.com/volatilityfoundation/volatility3">https://github.com/volatilityfoundation/volatility3</a></p><p>这里就使用python2版本的volatility演示，使用如下命令安装。</p><pre><code>git clone https://github.com/volatilityfoundation/volatility.gitcd volatilitypip install pycryptodomepip install distorm3python2 setup.py installvol.py -h</code></pre><h3 id="1-2-命令格式"><a href="#1-2-命令格式" class="headerlink" title="1.2  命令格式"></a>1.2  命令格式</h3><p>命令格式</p><pre><code>vol.py -f [image] --profile=[profile] [plugin]</code></pre><p>在分析之前，首先需要知道当前的镜像信息，通过imageinfo命令分析是哪个系统。</p><pre><code>vol.py -f xx.vmem imageinfo</code></pre><h3 id="1-3-常用插件"><a href="#1-3-常用插件" class="headerlink" title="1.3  常用插件"></a>1.3  常用插件</h3><p>查找⽤户名密码信息。当前操作系统中的 password hash，例如 Windows 的 SAM 文件内容</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hashdum</code></pre><p>从注册表中提取LSA密钥信息（已解密)</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 lsadump</code></pre><p>列举出系统进程，但它不能检测到隐藏或者解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 pslist</code></pre><p>可以找到先前已终止(不活动)的进程以及被rootkit隐藏或解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 psscan</code></pre><p>以树的形式查看进程列表，和pslist一样，也无法检测隐藏或解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 pstree</code></pre><p>提取进程, -p是进程号 -D 存储的文件夹 提取出指定进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 memdump -p xxx --dump-dir=./</code></pre><p>查看服务</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 svcscan</code></pre><p>查看ie浏览器浏览历史</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 iehistory</code></pre><p>查看⽹络连接</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 netscan</code></pre><p>查看命令⾏操作</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 cmdscan</code></pre><p>查看⽂件</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 filescan</code></pre><p>提取文件</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 dumpfiles -Q 0xxxxxxxx -D ./</code></pre><p>查看当前展示的notepad内容</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 notepad</code></pre><p>查看屏幕截图</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 screenshot --dump-dir=./</code></pre><p>查看注册表单元</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hivelist</code></pre><p>导出注册表, -o 注册表的virtual地址</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hivedump -o 0xfffff8a001032410</code></pre><p>获取注册表信息，-K “键值”</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 printkey -K "xxxxxxx"</code></pre><p>查看运⾏程序相关的记录</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 userassist</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;volatility&quot;&gt;&lt;a href=&quot;#volatility&quot; class=&quot;headerlink&quot; title=&quot;volatility&quot;&gt;&lt;/a&gt;volatility&lt;/h1&gt;&lt;h1 id=&quot;一-工具的基本使用&quot;&gt;&lt;a href=&quot;#一-工具的基本使用&quot; c</summary>
+      
+    
+    
+    
+    <category term="tools" scheme="http://emyia2001.github.io/categories/tools/"/>
+    
+    
+    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
+  
+  <entry>
     <title>DNS服务搭建</title>
     <link href="http://emyia2001.github.io/2022/11/03/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"/>
     <id>http://emyia2001.github.io/2022/11/03/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/</id>
