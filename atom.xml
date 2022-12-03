@@ -45,13 +45,38 @@
   </entry>
   
   <entry>
+    <title>Proxychains</title>
+    <link href="http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/"/>
+    <id>http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/</id>
+    <published>2022-12-03T09:07:38.000Z</published>
+    <updated>2022-12-03T09:10:02.089Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="设置ProxyChains"><a href="#设置ProxyChains" class="headerlink" title="设置ProxyChains"></a>设置ProxyChains</h1><p>ProxyChains是Linux和其他Unices下的代理工具。它可以使任何程序通过代理上网，允许TCP和DNS通过代理隧道，支持HTTP、SOCKS4和SOCKS5类型的代理服务器，并且可配置多个代理。ProxyChains通过一个用户定义的代理列表强制连接指定的应用程序，直接断开接收方和发送方的连接。本节将介绍设置ProxyChains的方法。</p><p>设置ProxyChains的具体操作步骤如下所示。</p><p>（1）打开ProxyChains配置文件。执行命令如下所示：</p><pre><code>vim /etc/proxychains.conf</code></pre><p>执行以上命令后，打开文件的内容如下所示：</p><pre><code># proxychains.conf VER 3.1## HTTP, SOCKS4, SOCKS5 tunneling proxifier with DNS.## The option below identifies how the ProxyList is treated.# only one option should be uncommented at time,# otherwise the last appearing option will be accepted##dynamic_chain## Dynamic - Each connection will be done via chained proxies# all proxies chained in the order as they appear in the list# at least one proxy must be online to play in chain# (dead proxies are skipped)# otherwise EINTR is returned to the app#strict_chain## Strict - Each connection will be done via chained proxies# all proxies chained in the order as they appear in the list# all proxies must be online to play in chain# otherwise EINTR is returned to the app##random_chain## Random - Each connection will be done via random proxy# (or proxy chain, see chain_len) from the list.# this option is good to test your IDS :)</code></pre><p>输出的信息就是proxychains.conf文件的内容。由于篇幅的原因，这里只列出了部分内容。</p><p>（2）将proxychains.conf文件中的dynamic_chain前面的注释符取消。要修改的配置项，是上面加粗的部分，如下所示：</p><pre><code>dynamic_chain</code></pre><p>（3）添加一些代理服务器到列表（proxychains.conf文件末尾），如下所示：</p><p><img src="/image/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/1.png"></p><p>红框内填写代理服务器IP及端口，保存退出。</p><p>（4）查看是否代理成功，执行命令如下所示：</p><pre><code>proxychains curl ipinfo.io</code></pre><p><img src="/image/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/2.png"></p><p>发现地址已经变成了台湾，说明代理成功了</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;设置ProxyChains&quot;&gt;&lt;a href=&quot;#设置ProxyChains&quot; class=&quot;headerlink&quot; title=&quot;设置ProxyChains&quot;&gt;&lt;/a&gt;设置ProxyChains&lt;/h1&gt;&lt;p&gt;ProxyChains是L</summary>
+      
+    
+    
+    
+    <category term="tools" scheme="http://emyia2001.github.io/categories/tools/"/>
+    
+    
+    <category term="tools" scheme="http://emyia2001.github.io/tags/tools/"/>
+    
+  </entry>
+  
+  <entry>
     <title>volatility常用命令</title>
     <link href="http://emyia2001.github.io/2022/11/05/volatility/"/>
     <id>http://emyia2001.github.io/2022/11/05/volatility/</id>
     <published>2022-11-05T02:07:38.000Z</published>
-    <updated>2022-11-05T02:30:37.429Z</updated>
+    <updated>2022-11-19T06:33:55.056Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="volatility"><a href="#volatility" class="headerlink" title="volatility"></a>volatility</h1><h1 id="一-工具的基本使用"><a href="#一-工具的基本使用" class="headerlink" title="一.   工具的基本使用"></a>一.   工具的基本使用</h1><h3 id="1-1-下载安装"><a href="#1-1-下载安装" class="headerlink" title="1.1  下载安装"></a>1.1  下载安装</h3><p>官网下载：<a href="https://www.volatilityfoundation.org/releases">https://www.volatilityfoundation.org/releases</a></p><p>github下载：</p><p>python2版本  <a href="https://github.com/volatilityfoundation/volatility">https://github.com/volatilityfoundation/volatility</a></p><p>python3版本 <a href="https://github.com/volatilityfoundation/volatility3">https://github.com/volatilityfoundation/volatility3</a></p><p>这里就使用python2版本的volatility演示，使用如下命令安装。</p><pre><code>git clone https://github.com/volatilityfoundation/volatility.gitcd volatilitypip install pycryptodomepip install distorm3python2 setup.py installvol.py -h</code></pre><h3 id="1-2-命令格式"><a href="#1-2-命令格式" class="headerlink" title="1.2  命令格式"></a>1.2  命令格式</h3><p>命令格式</p><pre><code>vol.py -f [image] --profile=[profile] [plugin]</code></pre><p>在分析之前，首先需要知道当前的镜像信息，通过imageinfo命令分析是哪个系统。</p><pre><code>vol.py -f xx.vmem imageinfo</code></pre><h3 id="1-3-常用插件"><a href="#1-3-常用插件" class="headerlink" title="1.3  常用插件"></a>1.3  常用插件</h3><p>查找⽤户名密码信息。当前操作系统中的 password hash，例如 Windows 的 SAM 文件内容</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hashdum</code></pre><p>从注册表中提取LSA密钥信息（已解密)</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 lsadump</code></pre><p>列举出系统进程，但它不能检测到隐藏或者解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 pslist</code></pre><p>可以找到先前已终止(不活动)的进程以及被rootkit隐藏或解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 psscan</code></pre><p>以树的形式查看进程列表，和pslist一样，也无法检测隐藏或解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 pstree</code></pre><p>提取进程, -p是进程号 -D 存储的文件夹 提取出指定进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 memdump -p xxx --dump-dir=./</code></pre><p>查看服务</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 svcscan</code></pre><p>查看ie浏览器浏览历史</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 iehistory</code></pre><p>查看⽹络连接</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 netscan</code></pre><p>查看命令⾏操作</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 cmdscan</code></pre><p>查看⽂件</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 filescan</code></pre><p>提取文件</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 dumpfiles -Q 0xxxxxxxx -D ./</code></pre><p>查看当前展示的notepad内容</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 notepad</code></pre><p>查看屏幕截图</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 screenshot --dump-dir=./</code></pre><p>查看注册表单元</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hivelist</code></pre><p>导出注册表, -o 注册表的virtual地址</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hivedump -o 0xfffff8a001032410</code></pre><p>获取注册表信息，-K “键值”</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 printkey -K "xxxxxxx"</code></pre><p>查看运⾏程序相关的记录</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 userassist</code></pre>]]></content>
+    <content type="html"><![CDATA[<h1 id="volatility"><a href="#volatility" class="headerlink" title="volatility"></a>volatility</h1><h1 id="一-工具的基本使用"><a href="#一-工具的基本使用" class="headerlink" title="一.   工具的基本使用"></a>一.   工具的基本使用</h1><h3 id="1-1-下载安装"><a href="#1-1-下载安装" class="headerlink" title="1.1  下载安装"></a>1.1  下载安装</h3><p>官网下载：<a href="https://www.volatilityfoundation.org/releases">https://www.volatilityfoundation.org/releases</a></p><p>github下载：</p><p>python2版本  <a href="https://github.com/volatilityfoundation/volatility">https://github.com/volatilityfoundation/volatility</a></p><p>python3版本 <a href="https://github.com/volatilityfoundation/volatility3">https://github.com/volatilityfoundation/volatility3</a></p><p>这里就使用python2版本的volatility演示，使用如下命令安装。</p><pre><code>git clone https://github.com/volatilityfoundation/volatility.gitcd volatilitypip install pycryptodomepip install distorm3python2 setup.py installvol.py -h</code></pre><h3 id="1-2-命令格式"><a href="#1-2-命令格式" class="headerlink" title="1.2  命令格式"></a>1.2  命令格式</h3><p>命令格式</p><pre><code>vol.py -f [image] --profile=[profile] [plugin]</code></pre><p>在分析之前，首先需要知道当前的镜像信息，通过imageinfo命令分析是哪个系统。</p><pre><code>vol.py -f xx.vmem imageinfo</code></pre><h3 id="1-3-常用插件"><a href="#1-3-常用插件" class="headerlink" title="1.3  常用插件"></a>1.3  常用插件</h3><p>查找⽤户名密码信息。当前操作系统中的 password hash，例如 Windows 的 SAM 文件内容</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hashdump</code></pre><p>从注册表中提取LSA密钥信息（已解密)</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 lsadump</code></pre><p>列举出系统进程，但它不能检测到隐藏或者解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 pslist</code></pre><p>可以找到先前已终止(不活动)的进程以及被rootkit隐藏或解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 psscan</code></pre><p>以树的形式查看进程列表，和pslist一样，也无法检测隐藏或解链的进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 pstree</code></pre><p>提取进程, -p是进程号 -D 存储的文件夹 提取出指定进程</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 memdump -p xxx --dump-dir=./</code></pre><p>查看服务</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 svcscan</code></pre><p>查看ie浏览器浏览历史</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 iehistory</code></pre><p>查看⽹络连接</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 netscan</code></pre><p>查看命令⾏操作</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 cmdscan</code></pre><p>查看⽂件</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 filescan</code></pre><p>提取文件</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 dumpfiles -Q 0xxxxxxxx -D ./</code></pre><p>查看当前展示的notepad内容</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 notepad</code></pre><p>查看屏幕截图</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 screenshot --dump-dir=./</code></pre><p>查看注册表单元</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hivelist</code></pre><p>导出注册表, -o 注册表的virtual地址</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 hivedump -o 0xfffff8a001032410</code></pre><p>获取注册表信息，-K “键值”</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 printkey -K "xxxxxxx"</code></pre><p>查看运⾏程序相关的记录</p><pre><code>vol.py -f Target.mem --profile=Win7SP0x64 userassist</code></pre>]]></content>
     
     
       
@@ -94,59 +119,6 @@
   </entry>
   
   <entry>
-    <title>PNG图片转换器</title>
-    <link href="http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
-    <id>http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-03T09:09:19.218Z</updated>
-    
-    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p><p><img src="/images/blog/1.png"></p><h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p><p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p><p><img src="/images/blog/2.1.png"></p><p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p><p>原理见：</p><pre><code>https://blog.csdn.net/Xxy605/article/details/120373095</code></pre><p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p><p><img src="/images/blog/2.2.png" alt="2.2"></p><p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p><p><img src="/./images/blog/2.3.png" alt="2.3"></p><p>读取该png，内容解码发现了flag</p><p><img src="/./images/blog/2.4.png" alt="2.4"></p><p><img src="/./images/blog/2.5.png" alt="2.5"></p><p>一样的方法用cat读取</p><p><img src="/./images/blog/2.6.png" alt="2.6"></p><p><img src="/./images/blog/2.7.png" alt="2.7"></p><p><img src="/./images/blog/2.8.png" alt="2.8"></p><p>base解码就可以得到flag</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
-&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot; cl</summary>
-      
-    
-    
-    
-    <category term="WEB" scheme="http://emyia2001.github.io/categories/WEB/"/>
-    
-    <category term="CTF" scheme="http://emyia2001.github.io/categories/WEB/CTF/"/>
-    
-    
-    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WSL安装与卸载</title>
-    <link href="http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
-    <id>http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</id>
-    <published>2022-10-21T03:07:38.000Z</published>
-    <updated>2022-11-03T09:09:23.222Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><pre><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code></pre><p>重启后以管理员身份打开 PowerShell 并运行：</p><pre><code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestartdism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></pre><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><pre><code>sudo apt updatesudo apt install -y kali-win-kex</code></pre><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><pre><code>kex --win-s</code></pre><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><pre><code>kex --esm --ip -s</code></pre><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><pre><code>kex --sl -s</code></pre><p>工具包</p><pre><code>sudo apt install -y kali-linux-large</code></pre><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><pre><code>wslconfig /l# 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令wslconfig /u Ubuntu</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
-&lt;h3 id=&quot;在-WSL2-中安装-Kali-Linux&quot;&gt;&lt;a href=&quot;#在-WSL2-中安装-Kali-Lin</summary>
-      
-    
-    
-    
-    <category term="WSL" scheme="http://emyia2001.github.io/categories/WSL/"/>
-    
-    
-    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    
-  </entry>
-  
-  <entry>
     <title>bilibili</title>
     <link href="http://emyia2001.github.io/2022/10/21/bilibili/"/>
     <id>http://emyia2001.github.io/2022/10/21/bilibili/</id>
@@ -169,6 +141,34 @@
     <category term="MISC" scheme="http://emyia2001.github.io/categories/MISC/"/>
     
     <category term="CTF" scheme="http://emyia2001.github.io/categories/MISC/CTF/"/>
+    
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PNG图片转换器</title>
+    <link href="http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/"/>
+    <id>http://emyia2001.github.io/2022/10/21/PNG%E5%9B%BE%E7%89%87%E8%BD%AC%E6%8D%A2%E5%99%A8/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-03T09:09:19.218Z</updated>
+    
+    <content type="html"><![CDATA[<p>[TOC]</p><h1 id="利用点"><a href="#利用点" class="headerlink" title="利用点"></a>利用点</h1><p>Ruby File.open()命令执行</p><h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>环境的源码通过app.rb给出</p><p><img src="/images/blog/1.png"></p><h1 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h1><p>Ruby File.open()命令执行</p><p>此web app用于将上传的图片转码为png文件，upload用于上传图片,convert用于转码，并将图片以base64编码的形式显示</p><p><img src="/images/blog/2.1.png"></p><p>代码审计，观察convert的函数，注意到调用了open()，因此可以试试命令执行，将命令写入一个存在的png文件，之后读取它，执行结果就会被base64编码显示在页面上</p><p>原理见：</p><pre><code>https://blog.csdn.net/Xxy605/article/details/120373095</code></pre><p>直接上传图片后显示了编码后的图片名字（后面抓包发现传入参数file完成open函数的传参）</p><p><img src="/images/blog/2.2.png" alt="2.2"></p><p>接着使用管道符开头上传shell命令，注意file参数过滤了斜杠还有后缀png检测，并且最重要的是png必须是已经存在的，那么我们可以将命令base64后执行，然后写入上面上传的那个png中。反引号内是把传入的base64值恢复，之后通过反引号执行，将输出写入图片</p><p><img src="/./images/blog/2.3.png" alt="2.3"></p><p>读取该png，内容解码发现了flag</p><p><img src="/./images/blog/2.4.png" alt="2.4"></p><p><img src="/./images/blog/2.5.png" alt="2.5"></p><p>一样的方法用cat读取</p><p><img src="/./images/blog/2.6.png" alt="2.6"></p><p><img src="/./images/blog/2.7.png" alt="2.7"></p><p><img src="/./images/blog/2.8.png" alt="2.8"></p><p>base解码就可以得到flag</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h1 id=&quot;利用点&quot;&gt;&lt;a href=&quot;#利用点&quot; class=&quot;headerlink&quot; title=&quot;利用点&quot;&gt;&lt;/a&gt;利用点&lt;/h1&gt;&lt;p&gt;Ruby File.open()命令执行&lt;/p&gt;
+&lt;h1 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot; cl</summary>
+      
+    
+    
+    
+    <category term="WEB" scheme="http://emyia2001.github.io/categories/WEB/"/>
+    
+    <category term="CTF" scheme="http://emyia2001.github.io/categories/WEB/CTF/"/>
     
     
     <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
@@ -202,6 +202,31 @@
     
     
     <category term="CTF" scheme="http://emyia2001.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WSL安装与卸载</title>
+    <link href="http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/"/>
+    <id>http://emyia2001.github.io/2022/10/21/WSL%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/</id>
+    <published>2022-10-21T03:07:38.000Z</published>
+    <updated>2022-11-03T09:09:23.222Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>[TOC]</p><h3 id="在-WSL2-中安装-Kali-Linux"><a href="#在-WSL2-中安装-Kali-Linux" class="headerlink" title="在 WSL2 中安装 Kali Linux"></a>在 WSL2 中安装 Kali Linux</h3><p>以管理员身份打开 PowerShell 并运行：</p><pre><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code></pre><p>重启后以管理员身份打开 PowerShell 并运行：</p><pre><code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestartdism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></pre><p>从这里下载并安装 WSL2 Linux 内核：<a href="https://aka.ms/wsl2kernel">https ://aka.ms/wsl2kernel</a><br>以管理员身份打开 PowerShell 并运行： wsl –set-default-version 2<br>从 Microsoft Store 安装 Kali Linux注意：要升级现有的 WSL1 kali-linux 安装，请键入： wsl –set-version kali-linux 2</p><h3 id="安装-Win-KeX"><a href="#安装-Win-KeX" class="headerlink" title="安装 Win-KeX"></a>安装 Win-KeX</h3><pre><code>sudo apt updatesudo apt install -y kali-win-kex</code></pre><h2 id="运行-Win-KeX"><a href="#运行-Win-KeX" class="headerlink" title="运行 Win-KeX"></a>运行 Win-KeX</h2><h4 id="Win-KeX-支持三种模式："><a href="#Win-KeX-支持三种模式：" class="headerlink" title="Win-KeX 支持三种模式："></a>Win-KeX 支持三种模式：</h4><p>Win-KeX Win<br>要在具有声音支持的窗口模式下启动 Win-KeX，请运行:</p><pre><code>kex --win-s</code></pre><p>Win-KeX ESM<br>要在具有声音支持和 arm 解决方法的增强会话模式下启动 Win-KeX，请运行:</p><pre><code>kex --esm --ip -s</code></pre><p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行:</p><pre><code>kex --sl -s</code></pre><p>工具包</p><pre><code>sudo apt install -y kali-linux-large</code></pre><h1 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h1><h3 id="卸载wsl子文件夹"><a href="#卸载wsl子文件夹" class="headerlink" title="卸载wsl子文件夹"></a>卸载wsl子文件夹</h3><p>打开cmd</p><pre><code>wslconfig /l# 从列表中选择要卸载的发行版（例如Ubuntu）并键入命令wslconfig /u Ubuntu</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h3 id=&quot;在-WSL2-中安装-Kali-Linux&quot;&gt;&lt;a href=&quot;#在-WSL2-中安装-Kali-Lin</summary>
+      
+    
+    
+    
+    <category term="WSL" scheme="http://emyia2001.github.io/categories/WSL/"/>
+    
+    
+    <category term="开发环境" scheme="http://emyia2001.github.io/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
