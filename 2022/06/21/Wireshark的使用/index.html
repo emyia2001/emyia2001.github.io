@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="筛选ipip.src &#x3D;&#x3D; 源ip地址 ip.dst &#x3D;&#x3D; 目的ip地址 mac地址筛选eth.dst &#x3D;&#x3D;A0:00:00:04:C5:84 筛选目标mac地址 eth.addr&#x3D;&#x3D;A0:00:00:04:C5:84 筛选MAC地址 端口筛选tcp.dstport &#x3D;&#x3D; 80  筛选tcp协议的目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wireshark">
+<meta property="og:url" content="http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Snark&#39;s blog">
+<meta property="og:description" content="筛选ipip.src &#x3D;&#x3D; 源ip地址 ip.dst &#x3D;&#x3D; 目的ip地址 mac地址筛选eth.dst &#x3D;&#x3D;A0:00:00:04:C5:84 筛选目标mac地址 eth.addr&#x3D;&#x3D;A0:00:00:04:C5:84 筛选MAC地址 端口筛选tcp.dstport &#x3D;&#x3D; 80  筛选tcp协议的目">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-21T07:08:30.000Z">
+<meta property="article:modified_time" content="2023-04-03T16:53:02.121Z">
+<meta property="article:author" content="Snark">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>wireshark</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Snark&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/10/03/DNS%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&text=wireshark"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=wireshark"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=wireshark&body=Check out this article: http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&name=wireshark&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&t=wireshark"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%9B%E9%80%89ip"><span class="toc-number">1.</span> <span class="toc-text">筛选ip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac%E5%9C%B0%E5%9D%80%E7%AD%9B%E9%80%89"><span class="toc-number">2.</span> <span class="toc-text">mac地址筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%AD%9B%E9%80%89"><span class="toc-number">3.</span> <span class="toc-text">端口筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E7%AD%9B%E9%80%89"><span class="toc-number">4.</span> <span class="toc-text">协议筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E9%95%BF%E5%BA%A6%E7%AD%9B%E9%80%89"><span class="toc-number">5.</span> <span class="toc-text">包长度筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E8%AF%B7%E6%B1%82%E7%AD%9B%E9%80%89"><span class="toc-number">6.</span> <span class="toc-text">http请求筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="toc-number">7.</span> <span class="toc-text">数据提取</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        wireshark
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Snark</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-21T07:08:30.000Z" itemprop="datePublished">2022-06-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/tools/">tools</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/tools/" rel="tag">tools</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="筛选ip"><a href="#筛选ip" class="headerlink" title="筛选ip"></a>筛选ip</h3><p>ip.src &#x3D;&#x3D; 源ip地址</p>
+<p>ip.dst &#x3D;&#x3D; 目的ip地址</p>
+<h3 id="mac地址筛选"><a href="#mac地址筛选" class="headerlink" title="mac地址筛选"></a>mac地址筛选</h3><p>eth.dst &#x3D;&#x3D;A0:00:00:04:C5:84 筛选目标mac地址</p>
+<p>eth.addr&#x3D;&#x3D;A0:00:00:04:C5:84 筛选MAC地址</p>
+<h3 id="端口筛选"><a href="#端口筛选" class="headerlink" title="端口筛选"></a>端口筛选</h3><p>tcp.dstport &#x3D;&#x3D; 80  筛选tcp协议的目标端口为80的流量包</p>
+<p>tcp.srcport &#x3D;&#x3D; 80  筛选tcp协议的源端口为80的流量包</p>
+<p>udp.srcport &#x3D;&#x3D; 80  筛选udp协议的源端口为80的流量包</p>
+<h3 id="协议筛选"><a href="#协议筛选" class="headerlink" title="协议筛选"></a>协议筛选</h3><p>tcp  筛选协议为tcp的流量包</p>
+<p>udp 筛选协议为udp的流量包</p>
+<p>arp&#x2F;icmp&#x2F;http&#x2F;ftp&#x2F;dns&#x2F;ip  筛选协议为arp&#x2F;icmp&#x2F;http&#x2F;ftp&#x2F;dns&#x2F;ip的流量包</p>
+<h3 id="包长度筛选"><a href="#包长度筛选" class="headerlink" title="包长度筛选"></a>包长度筛选</h3><p>udp.length &#x3D;&#x3D;20   筛选长度为20的udp流量包</p>
+<p>tcp.len &gt;&#x3D;20  筛选长度大于20的tcp流量包</p>
+<p>ip.len &#x3D;&#x3D;20  筛选长度为20的IP流量包</p>
+<p>frame.len &#x3D;&#x3D;20 筛选长度为20的整个流量包</p>
+<h3 id="http请求筛选"><a href="#http请求筛选" class="headerlink" title="http请求筛选"></a>http请求筛选</h3><p>请求方法为GET：http.request.method&#x3D;&#x3D;“GET”        筛选HTTP请求方法为GET的 流量包</p>
+<p>请求方法为POST：http.request.method&#x3D;&#x3D;“POST”      筛选HTTP请求方法为POST的流量包</p>
+<p>指定URI：http.request.uri&#x3D;&#x3D;“&#x2F;img&#x2F;logo-edu.gif”  筛选HTTP请求的URL为&#x2F;img&#x2F;logo-edu.gif的流量包</p>
+<p>请求或相应中包含特定内容：http contains “FLAG”    筛选HTTP内容为&#x2F;FLAG的流量包<br>数据包搜索</p>
+<h3 id="数据提取"><a href="#数据提取" class="headerlink" title="数据提取"></a>数据提取</h3><p>Wireshark支持提取通过http传输（上传&#x2F;下载）的文件内容，方法如下：<br>自动提取通过http传输的文件内容<br>文件-&gt;导出对象-&gt;HTTP</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%9B%E9%80%89ip"><span class="toc-number">1.</span> <span class="toc-text">筛选ip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mac%E5%9C%B0%E5%9D%80%E7%AD%9B%E9%80%89"><span class="toc-number">2.</span> <span class="toc-text">mac地址筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%AD%9B%E9%80%89"><span class="toc-number">3.</span> <span class="toc-text">端口筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E7%AD%9B%E9%80%89"><span class="toc-number">4.</span> <span class="toc-text">协议筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E9%95%BF%E5%BA%A6%E7%AD%9B%E9%80%89"><span class="toc-number">5.</span> <span class="toc-text">包长度筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E8%AF%B7%E6%B1%82%E7%AD%9B%E9%80%89"><span class="toc-number">6.</span> <span class="toc-text">http请求筛选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="toc-number">7.</span> <span class="toc-text">数据提取</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&text=wireshark"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=wireshark"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=wireshark&body=Check out this article: http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&title=wireshark"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&name=wireshark&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://emyia2001.github.io/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/&t=wireshark"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Snark
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

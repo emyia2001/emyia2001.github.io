@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="powershell美化fzf文件搜索12# 安装fzfscoop install fzf 添加用户配置文件把user_profile.ps1、command_profile.ps1文件创建到 “用户目录.config\powershell” 下使用$profile查看PowerShell配置文件，打开文件添加以下命令 oh-my-posh12345# 安装oh-my-poshscoop inst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows开发配置">
+<meta property="og:url" content="http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Snark&#39;s blog">
+<meta property="og:description" content="powershell美化fzf文件搜索12# 安装fzfscoop install fzf 添加用户配置文件把user_profile.ps1、command_profile.ps1文件创建到 “用户目录.config\powershell” 下使用$profile查看PowerShell配置文件，打开文件添加以下命令 oh-my-posh12345# 安装oh-my-poshscoop inst">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://emyia2001.github.io/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/1.png">
+<meta property="og:image" content="http://emyia2001.github.io/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/2.png">
+<meta property="og:image" content="http://emyia2001.github.io/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/3.png">
+<meta property="og:image" content="http://emyia2001.github.io/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/4.png">
+<meta property="og:image" content="http://emyia2001.github.io/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/5.png">
+<meta property="article:published_time" content="2022-06-02T13:13:00.000Z">
+<meta property="article:modified_time" content="2023-04-03T16:53:02.123Z">
+<meta property="article:author" content="Snark">
+<meta property="article:tag" content="开发环境">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://emyia2001.github.io/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Windows开发配置</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Snark&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2022/06/21/Wireshark%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/10/21/%E4%B8%80%E4%B8%AA%E5%AF%86%E7%A0%81/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&text=Windows开发配置"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&is_video=false&description=Windows开发配置"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Windows开发配置&body=Check out this article: http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&name=Windows开发配置&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&t=Windows开发配置"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#powershell%E7%BE%8E%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">powershell美化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fzf%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">fzf文件搜索</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.2.</span> <span class="toc-text">添加用户配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#oh-my-posh"><span class="toc-number">1.0.3.</span> <span class="toc-text">oh-my-posh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Terminal-Icons"><span class="toc-number">1.0.4.</span> <span class="toc-text">Terminal-Icons</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#posh-git"><span class="toc-number">1.0.5.</span> <span class="toc-text">posh-git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PSReadLine"><span class="toc-number">1.0.6.</span> <span class="toc-text">PSReadLine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#which-%E5%92%8C-touch"><span class="toc-number">1.0.7.</span> <span class="toc-text">which 和 touch</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scoop"><span class="toc-number">2.</span> <span class="toc-text">scoop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">系统环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#python3%E3%80%81python2-7"><span class="toc-number">3.0.1.</span> <span class="toc-text">python3、python2.7</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim"><span class="toc-number">4.</span> <span class="toc-text">vim</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85neovide"><span class="toc-number">4.0.1.</span> <span class="toc-text">安装neovide</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LunarVim"><span class="toc-number">4.0.2.</span> <span class="toc-text">LunarVim</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85PowerShell-7-2"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">安装PowerShell 7.2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">4.0.2.2.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-LunarVim"><span class="toc-number">4.0.2.3.</span> <span class="toc-text">安装 LunarVim</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NeoVide-%E7%BB%93%E5%90%88-LunarVim"><span class="toc-number">4.0.2.4.</span> <span class="toc-text">NeoVide 结合 LunarVim</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AELunarVim%E5%AD%97%E4%BD%93"><span class="toc-number">4.0.2.5.</span> <span class="toc-text">设置LunarVim字体</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0"><span class="toc-number">4.0.2.6.</span> <span class="toc-text">为命令配置文件添加</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wsl2"><span class="toc-number">5.</span> <span class="toc-text">wsl2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-number">5.0.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB"><span class="toc-number">5.0.2.</span> <span class="toc-text">迁移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">5.0.3.</span> <span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8D%A2%E6%BA%90"><span class="toc-number">5.0.3.1.</span> <span class="toc-text">换源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#apache2"><span class="toc-number">5.0.3.2.</span> <span class="toc-text">apache2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#php"><span class="toc-number">5.0.3.3.</span> <span class="toc-text">php</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mysql"><span class="toc-number">5.0.3.4.</span> <span class="toc-text">mysql</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEmysql"><span class="toc-number">5.0.3.5.</span> <span class="toc-text">配置mysql</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">java开发环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDJDK"><span class="toc-number">6.1.</span> <span class="toc-text">下载JDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90SSH%E5%AF%86%E9%92%A5%E7%99%BB%E9%99%86%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">生成SSH密钥登陆云服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90SSH-key"><span class="toc-number">7.1.</span> <span class="toc-text">生成SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E5%85%AC%E9%92%A5%E4%BC%A0%E8%BE%93%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.2.</span> <span class="toc-text">将公钥传输上云服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#blog%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">blog环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85git"><span class="toc-number">8.1.</span> <span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nodejs"><span class="toc-number">8.2.</span> <span class="toc-text">安装nodejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hexo"><span class="toc-number">8.3.</span> <span class="toc-text">安装hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">8.3.1.</span> <span class="toc-text">hexo常用命令</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Windows开发配置
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Snark</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-02T13:13:00.000Z" itemprop="datePublished">2022-06-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">服务搭建</a> › <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/powershell%E7%BE%8E%E5%8C%96/">powershell美化</a> › <a class="category-link" href="/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/powershell%E7%BE%8E%E5%8C%96/WSL/">WSL</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="tag">开发环境</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="powershell美化"><a href="#powershell美化" class="headerlink" title="powershell美化"></a>powershell美化</h2><h4 id="fzf文件搜索"><a href="#fzf文件搜索" class="headerlink" title="fzf文件搜索"></a>fzf文件搜索</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装fzf</span><br><span class="line">scoop install fzf</span><br></pre></td></tr></table></figure>
+<h4 id="添加用户配置文件"><a href="#添加用户配置文件" class="headerlink" title="添加用户配置文件"></a>添加用户配置文件</h4><p>把user_profile.ps1、command_profile.ps1文件创建到 “用户目录.config\powershell” 下<br>使用$profile查看PowerShell配置文件，打开文件添加以下命令</p>
+<h4 id="oh-my-posh"><a href="#oh-my-posh" class="headerlink" title="oh-my-posh"></a>oh-my-posh</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装oh-my-posh</span><br><span class="line">scoop install oh-my-posh</span><br><span class="line"></span><br><span class="line"># 在用户配置文件中添加</span><br><span class="line">oh-my-posh --init --shell pwsh --config C:\Users\31438\scoop\apps\oh-my-posh\current\themes\unicorn.omp.json | Invoke-Expression</span><br></pre></td></tr></table></figure>
+<h4 id="Terminal-Icons"><a href="#Terminal-Icons" class="headerlink" title="Terminal-Icons"></a>Terminal-Icons</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装Terminal-Icons</span><br><span class="line">scoop install terminal-icons</span><br><span class="line"></span><br><span class="line"># 在用户配置文件下添加</span><br><span class="line">Import-Module -Name Terminal-Icons</span><br></pre></td></tr></table></figure>
+<h4 id="posh-git"><a href="#posh-git" class="headerlink" title="posh-git"></a>posh-git</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装posh-git</span><br><span class="line">scoop install posh-git</span><br><span class="line"></span><br><span class="line"># 在用户配置文件下添加</span><br><span class="line">Import-Module posh-git</span><br></pre></td></tr></table></figure>
+<h4 id="PSReadLine"><a href="#PSReadLine" class="headerlink" title="PSReadLine"></a>PSReadLine</h4><p>查看PSReadLine的全部函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Get-PSReadLineKeyHandler</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装PSReadLine</span><br><span class="line">Install-Module -Name PSReadLine -AllowPrerelease -Force</span><br></pre></td></tr></table></figure>
+<p>为PowerShell配置相关快捷键<br>:::info<br>配置文件$Profile<br>:::</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># PSReadLine配置</span><br><span class="line">Set-PSReadLineOption -PredictionSource History # 设置预测文本来源为历史记录</span><br><span class="line">Set-PSReadLineOption -HistorySearchCursorMovesToEnd # 选择历史命令时，光标移动到末尾</span><br><span class="line">Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete # 设置 Tab 为菜单补全和 Intellisense</span><br><span class="line">Set-PSReadLineKeyHandler -Key &quot;Ctrl+z&quot; -Function Undo # 设置 Ctrl+z 为撤销</span><br><span class="line">Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward # 设置向上键为后向搜索历史记录</span><br><span class="line">Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward # 设置向下键为前向搜索历史纪录</span><br><span class="line">Set-PsReadLineKeyHandler -key &quot;Ctrl+Shift+a&quot; -Function BeginningOfLine # 将光标移动到行首</span><br><span class="line">Set-PsReadLineKeyHandler -key &quot;Ctrl+a&quot; -Function BackwardWord # 向前移动一个单词</span><br><span class="line"># 将光标移动到行尾，并能补全历史命令</span><br><span class="line">Set-PSReadLineKeyHandler -Chord &quot;Ctrl+Shift+e&quot; -ScriptBlock &#123;</span><br><span class="line">    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()</span><br><span class="line">    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()</span><br><span class="line">&#125;</span><br><span class="line">Set-PsReadLineKeyHandler -key &quot;Ctrl+e&quot; -Function ForwardWord # 向后移动一个单词</span><br><span class="line"># 定义颜色</span><br><span class="line">Set-PSReadLineOption -Colors @&#123;</span><br><span class="line">  Command            = &#x27;Magenta&#x27;</span><br><span class="line">  Number             = &#x27;DarkBlue&#x27;</span><br><span class="line">  Member             = &#x27;DarkBlue&#x27;</span><br><span class="line">  Operator           = &#x27;DarkBlue&#x27;</span><br><span class="line">  Type               = &#x27;DarkBlue&#x27;</span><br><span class="line">  Variable           = &#x27;DarkGreen&#x27;</span><br><span class="line">  Parameter          = &#x27;DarkGreen&#x27;</span><br><span class="line">  ContinuationPrompt = &#x27;DarkBlue&#x27;</span><br><span class="line">  Default            = &#x27;DarkBlue&#x27;</span><br><span class="line">  InlinePrediction   = &#x27;DarkGray&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="which-和-touch"><a href="#which-和-touch" class="headerlink" title="which 和 touch"></a>which 和 touch</h4><p>在command_profile.ps1中添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># which 和 touch</span><br><span class="line">function which ($command) &#123;</span><br><span class="line">  Get-Command -Name $command -ErrorAction SilentlyContinue |</span><br><span class="line">    Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue</span><br><span class="line">&#125;</span><br><span class="line">function touch($name)&#123;</span><br><span class="line">  if ($name) &#123;</span><br><span class="line">    $file_path = Split-Path -Path $name</span><br><span class="line">    $file_name = Split-Path -Path $name -Leaf</span><br><span class="line">    if ($file_path -eq &quot;&quot;) &#123;</span><br><span class="line">      $file_path = &quot;.&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    if (-Not (Test-Path($file_path))) &#123;</span><br><span class="line">      New-Item -ItemType &quot;directory&quot; -Path $file_path</span><br><span class="line">    &#125;</span><br><span class="line">    New-Item -Path $file_path -Name $file_name -ItemType &quot;file&quot;</span><br><span class="line">  &#125;</span><br><span class="line">  else &#123;</span><br><span class="line">     Write-Host &quot;Command to create new file.&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="scoop"><a href="#scoop" class="headerlink" title="scoop"></a>scoop</h2><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 一键安装scoop</span><br><span class="line">Invoke-Expression (New-Object System.Net.WebClient).DownloadString(&#x27;https://get.scoop.sh&#x27;)</span><br><span class="line"></span><br><span class="line"># 如果执行出错就是用这条命令后，再执行上一条命令</span><br><span class="line">Set-ExecutionPolicy RemoteSigned -scope CurrentUser</span><br></pre></td></tr></table></figure>
+<p><strong>帮助文档</strong><br><a target="_blank" rel="noopener" href="https://scoop-docs.vercel.app/">https://scoop-docs.vercel.app/</a></p>
+<h2 id="系统环境配置"><a href="#系统环境配置" class="headerlink" title="系统环境配置"></a>系统环境配置</h2><h4 id="python3、python2-7"><a href="#python3、python2-7" class="headerlink" title="python3、python2.7"></a>python3、python2.7</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 添加versions软件源</span><br><span class="line">scoop bucket add versions</span><br><span class="line"></span><br><span class="line"># 安装python</span><br><span class="line">scoop install python python27</span><br><span class="line"></span><br><span class="line"># 多版本切换</span><br><span class="line">scoop reset 想要使用的版本</span><br></pre></td></tr></table></figure>
+<h2 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装neovim</span><br><span class="line">scoop install neovim</span><br></pre></td></tr></table></figure>
+<p>neovim扩展<br><a target="_blank" rel="noopener" href="https://neovimcraft.com/">https://neovimcraft.com/</a></p>
+<h4 id="安装neovide"><a href="#安装neovide" class="headerlink" title="安装neovide"></a>安装neovide</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 必须要有extras软件库</span><br><span class="line">scoop install neovide</span><br></pre></td></tr></table></figure>
+<h4 id="LunarVim"><a href="#LunarVim" class="headerlink" title="LunarVim"></a>LunarVim</h4><h5 id="安装PowerShell-7-2"><a href="#安装PowerShell-7-2" class="headerlink" title="安装PowerShell 7.2"></a>安装PowerShell 7.2</h5><p>[<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on%02windows?view=powershell-7.2%5D(https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on%02windows?view=powershell-7.2)">https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-onwindows?view=powershell-7.2](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-onwindows?view=powershell-7.2)</a></p>
+<h5 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scoop install nodejs</span><br><span class="line">scoop install python</span><br><span class="line">scoop install gcc</span><br></pre></td></tr></table></figure>
+<p>更换Python 和 NPM 源<br>Python<br>豆瓣源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.index-url https://pypi.douban.com/simple/</span><br></pre></td></tr></table></figure>
+<p>Python with HTTP<br>豆瓣源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.index-url http://pypi.douban.com/simple/</span><br><span class="line">pip config set install.trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
+<p>NPM<br>淘宝源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<h5 id="安装-LunarVim"><a href="#安装-LunarVim" class="headerlink" title="安装 LunarVim"></a>安装 LunarVim</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Invoke-WebRequest\</span><br><span class="line">https://raw.githubusercontent.com/LunarVim/LunarVim/master/utils/installer/inst\</span><br><span class="line">all.ps1 -UseBasicParsing | Invoke-Expression</span><br></pre></td></tr></table></figure>
+<p>根据需求选择完毕后<br>输入 lvim 进入 LunarVim 使用 :PackerSync 安装插件</p>
+<h5 id="NeoVide-结合-LunarVim"><a href="#NeoVide-结合-LunarVim" class="headerlink" title="NeoVide 结合 LunarVim"></a>NeoVide 结合 LunarVim</h5><p>创建可执行文件<br>添加 ~&#x2F;.local&#x2F;bin 到环境变量 $PATH 中<br>进入 ~&#x2F;.local&#x2F;bin<br>将 lvim.ps1 复制为 lvide.ps1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp lvim.ps1 lvide.ps1</span><br></pre></td></tr></table></figure>
+<p>编辑 lvide.ps1<br>将最后的一行代码替换成为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">neovide -- -u &quot;$env:LUNARVIM_RUNTIME_DIR\lvim\init.lua&quot; @args</span><br></pre></td></tr></table></figure>
+<p>创建快捷方式<br> 进入 C:\Users$env:USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs 中 右键添加快捷方式，为 C:\Program Files\PowerShell\7\pwsh.exe 添加快捷方式<br>命名为 Lvide<br>编辑 Lvide 属性<br>在目标路径更改为 “C:\Users%UserName%.local\bin\lvide.ps1”<br>设置起始位为 “C:\Users%UserName%\OneDrive\Desktop”<br>设置快捷键为 “Shift + Alt + P”<br>更改图标为 NeoVIM 的图标 “%USERPROFILE%\scoop\apps\neovim\current\bin\nvim-qt.exe”</p>
+<h5 id="设置LunarVim字体"><a href="#设置LunarVim字体" class="headerlink" title="设置LunarVim字体"></a>设置LunarVim字体</h5><p>编辑LunarVim 配置文件 “C:\Users%UserName%\AppData\Local\lvim\config.lua”<br>添加 vim.o.guifont &#x3D; “Hack NF” 配置字体</p>
+<h5 id="为命令配置文件添加"><a href="#为命令配置文件添加" class="headerlink" title="为命令配置文件添加"></a>为命令配置文件添加</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set-Alias lvim C:\Users\31438\.local\bin\lvim.ps1</span><br><span class="line">Set-Alias lvide C:\Users\31438\.local\bin\lvide.ps1</span><br></pre></td></tr></table></figure>
+<h2 id="wsl2"><a href="#wsl2" class="headerlink" title="wsl2"></a>wsl2</h2><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h4><p>win键搜索 Windows Features打开 适用于linux的windows子系统 和 Hyper-V 和 虚拟机平台 然后重启电脑<br>使用微软商店安装 ubuntu 22.04即可</p>
+<h4 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h4><p>在 设置 -&gt; 应用 -&gt; 应用和功能 -&gt; linux发行版 -&gt; 移动</p>
+<h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><h5 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 打开源文件</span><br><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"># 替换成阿里源</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<h5 id="apache2"><a href="#apache2" class="headerlink" title="apache2"></a>apache2</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 安装apache2</span><br><span class="line">sudo apt install apache2</span><br><span class="line"></span><br><span class="line"># 开启服务</span><br><span class="line">sudo service apache2 start</span><br><span class="line"></span><br><span class="line"># 测试</span><br><span class="line">curl 127.0.0.1</span><br></pre></td></tr></table></figure>
+<h5 id="php"><a href="#php" class="headerlink" title="php"></a>php</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装php</span><br><span class="line">sudo apt install php libapache2-mod-php</span><br></pre></td></tr></table></figure>
+<h5 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 安装Mysql</span><br><span class="line">sudo apt install mysql-server</span><br></pre></td></tr></table></figure>
+<h5 id="配置mysql"><a href="#配置mysql" class="headerlink" title="配置mysql"></a>配置mysql</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 运行保护mysql的脚本</span><br><span class="line">sudo mysql_secure_installation</span><br><span class="line"># 登录</span><br><span class="line">sudo mysql -u root</span><br><span class="line"></span><br><span class="line"># 创建用户</span><br><span class="line">mysql&gt; CREATE USER &#x27;username&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;password&#x27;;</span><br><span class="line"></span><br><span class="line"># 赋予权限</span><br><span class="line">mysql&gt; GRANT ALL(select, insert, update, delete) ON databasename.tablename(* 为全部) TO &#x27;username&#x27;@&#x27;localhost&#x27; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="java开发环境配置"><a href="#java开发环境配置" class="headerlink" title="java开发环境配置"></a>java开发环境配置</h2><h3 id="下载JDK"><a href="#下载JDK" class="headerlink" title="下载JDK"></a>下载JDK</h3><p>下载 java 开发工具包 JDK，下载地址：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/">https://www.oracle.com/java/technologies/downloads/</a></p>
+<h2 id="生成SSH密钥登陆云服务器"><a href="#生成SSH密钥登陆云服务器" class="headerlink" title="生成SSH密钥登陆云服务器"></a>生成SSH密钥登陆云服务器</h2><h3 id="生成SSH-key"><a href="#生成SSH-key" class="headerlink" title="生成SSH key"></a>生成SSH key</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">PowerShell 7.3.2</span><br><span class="line">PS C:\Users\dh176&gt; ssh-keygen -t rsa -b 4096 -C &quot;192.168.1.1&quot;</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (C:\Users\dh176/.ssh/id_rsa): key</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in key</span><br><span class="line">Your public key has been saved in key.pub</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:Q2OhAt/RcZmaJ2pHX1WMDDsk40g7oLCJ+YkQNZaoYP4 192.168.1.1</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+---[RSA 4096]----+</span><br><span class="line">|.o*.  o.+.+ooo +.|</span><br><span class="line">|o*.B o =.*o+ .+ .|</span><br><span class="line">|O o + o Bo. o.   |</span><br><span class="line">|o+ . . o=o. ..   |</span><br><span class="line">|. +    oS+ .     |</span><br><span class="line">|   E  o ...      |</span><br><span class="line">|     . .         |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">+----[SHA256]-----+</span><br><span class="line">PS C:\Users\dh176&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>key是私钥，key.pub是公钥</strong></p>
+<h3 id="将公钥传输上云服务器"><a href="#将公钥传输上云服务器" class="headerlink" title="将公钥传输上云服务器"></a>将公钥传输上云服务器</h3><p>这里我使用的mobaxterm，用户root，密钥文件key.pub</p>
+<p><img src="/../images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/1.png"></p>
+<h2 id="blog环境配置"><a href="#blog环境配置" class="headerlink" title="blog环境配置"></a>blog环境配置</h2><h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>直接在官网下载git：<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<p>打开Git Bash，设置user.name和user.email配置信息：</p>
+<p><img src="/../images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/2.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;你的GitHub用户名&quot;</span><br><span class="line">git config --global user.email &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>生成ssh密钥文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p>直接三个回车即可，默认不需要设置密码<br>在.ssh的文件夹中的id_rsa.pub密钥，将内容全部复制传上自己的github</p>
+<p><img src="/../images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/3.png"></p>
+<p><img src="/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/4.png"></p>
+<p>在Git Bash中检测GitHub公钥设置是否成功，输入 ssh <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#x63;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#x63;&#111;&#109;</a></p>
+<p><img src="/images/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/5.png"></p>
+<h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop install nodejs</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scoop install nodejs  #使用scoop安装nodejs</span><br><span class="line">npm install -g hexo-cli  #安装hexo</span><br></pre></td></tr></table></figure>
+
+<h4 id="hexo常用命令"><a href="#hexo常用命令" class="headerlink" title="hexo常用命令"></a>hexo常用命令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g #安装Hexo  </span><br><span class="line">npm update hexo -g #升级  </span><br><span class="line">hexo init #初始化博客  </span><br><span class="line">  </span><br><span class="line">命令简写  </span><br><span class="line">hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章  </span><br><span class="line">hexo g == hexo generate #生成  </span><br><span class="line">hexo s == hexo server #启动服务预览  </span><br><span class="line">hexo d == hexo deploy #部署  </span><br><span class="line">  </span><br><span class="line">hexo server #Hexo会监视文件变动并自动更新，无须重启服务器  </span><br><span class="line">hexo server -s #静态模式  </span><br><span class="line">hexo server -p 5000 #更改端口  </span><br><span class="line">hexo server -i 192.168.1.1 #自定义 IP  </span><br><span class="line">hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#powershell%E7%BE%8E%E5%8C%96"><span class="toc-number">1.</span> <span class="toc-text">powershell美化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#fzf%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2"><span class="toc-number">1.0.1.</span> <span class="toc-text">fzf文件搜索</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.2.</span> <span class="toc-text">添加用户配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#oh-my-posh"><span class="toc-number">1.0.3.</span> <span class="toc-text">oh-my-posh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Terminal-Icons"><span class="toc-number">1.0.4.</span> <span class="toc-text">Terminal-Icons</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#posh-git"><span class="toc-number">1.0.5.</span> <span class="toc-text">posh-git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PSReadLine"><span class="toc-number">1.0.6.</span> <span class="toc-text">PSReadLine</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#which-%E5%92%8C-touch"><span class="toc-number">1.0.7.</span> <span class="toc-text">which 和 touch</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scoop"><span class="toc-number">2.</span> <span class="toc-text">scoop</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.0.1.</span> <span class="toc-text">安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">系统环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#python3%E3%80%81python2-7"><span class="toc-number">3.0.1.</span> <span class="toc-text">python3、python2.7</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim"><span class="toc-number">4.</span> <span class="toc-text">vim</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85neovide"><span class="toc-number">4.0.1.</span> <span class="toc-text">安装neovide</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LunarVim"><span class="toc-number">4.0.2.</span> <span class="toc-text">LunarVim</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85PowerShell-7-2"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">安装PowerShell 7.2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">4.0.2.2.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-LunarVim"><span class="toc-number">4.0.2.3.</span> <span class="toc-text">安装 LunarVim</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NeoVide-%E7%BB%93%E5%90%88-LunarVim"><span class="toc-number">4.0.2.4.</span> <span class="toc-text">NeoVide 结合 LunarVim</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AELunarVim%E5%AD%97%E4%BD%93"><span class="toc-number">4.0.2.5.</span> <span class="toc-text">设置LunarVim字体</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E5%91%BD%E4%BB%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%B7%BB%E5%8A%A0"><span class="toc-number">4.0.2.6.</span> <span class="toc-text">为命令配置文件添加</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wsl2"><span class="toc-number">5.</span> <span class="toc-text">wsl2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-number">5.0.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB"><span class="toc-number">5.0.2.</span> <span class="toc-text">迁移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">5.0.3.</span> <span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8D%A2%E6%BA%90"><span class="toc-number">5.0.3.1.</span> <span class="toc-text">换源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#apache2"><span class="toc-number">5.0.3.2.</span> <span class="toc-text">apache2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#php"><span class="toc-number">5.0.3.3.</span> <span class="toc-text">php</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mysql"><span class="toc-number">5.0.3.4.</span> <span class="toc-text">mysql</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEmysql"><span class="toc-number">5.0.3.5.</span> <span class="toc-text">配置mysql</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">java开发环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDJDK"><span class="toc-number">6.1.</span> <span class="toc-text">下载JDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90SSH%E5%AF%86%E9%92%A5%E7%99%BB%E9%99%86%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">生成SSH密钥登陆云服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90SSH-key"><span class="toc-number">7.1.</span> <span class="toc-text">生成SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E5%85%AC%E9%92%A5%E4%BC%A0%E8%BE%93%E4%B8%8A%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">7.2.</span> <span class="toc-text">将公钥传输上云服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#blog%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">8.</span> <span class="toc-text">blog环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85git"><span class="toc-number">8.1.</span> <span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nodejs"><span class="toc-number">8.2.</span> <span class="toc-text">安装nodejs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hexo"><span class="toc-number">8.3.</span> <span class="toc-text">安装hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hexo%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">8.3.1.</span> <span class="toc-text">hexo常用命令</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&text=Windows开发配置"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&is_video=false&description=Windows开发配置"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Windows开发配置&body=Check out this article: http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&title=Windows开发配置"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&name=Windows开发配置&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://emyia2001.github.io/2022/06/02/windows%E5%BC%80%E5%8F%91%E9%85%8D%E7%BD%AE/&t=Windows开发配置"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Snark
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

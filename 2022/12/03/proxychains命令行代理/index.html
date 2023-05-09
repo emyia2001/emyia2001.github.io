@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="设置ProxyChainsProxyChains是Linux和其他Unices下的代理工具。它可以使任何程序通过代理上网，允许TCP和DNS通过代理隧道，支持HTTP、SOCKS4和SOCKS5类型的代理服务器，并且可配置多个代理。ProxyChains通过一个用户定义的代理列表强制连接指定的应用程序，直接断开接收方和发送方的连接。本节将介绍设置ProxyChains的方法。 设置ProxyCha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Proxychains">
+<meta property="og:url" content="http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:site_name" content="Snark&#39;s blog">
+<meta property="og:description" content="设置ProxyChainsProxyChains是Linux和其他Unices下的代理工具。它可以使任何程序通过代理上网，允许TCP和DNS通过代理隧道，支持HTTP、SOCKS4和SOCKS5类型的代理服务器，并且可配置多个代理。ProxyChains通过一个用户定义的代理列表强制连接指定的应用程序，直接断开接收方和发送方的连接。本节将介绍设置ProxyChains的方法。 设置ProxyCha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://emyia2001.github.io/images/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/1.png">
+<meta property="og:image" content="http://emyia2001.github.io/images/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/2.png">
+<meta property="article:published_time" content="2022-12-03T09:07:38.000Z">
+<meta property="article:modified_time" content="2023-04-03T16:53:02.122Z">
+<meta property="article:author" content="Snark">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://emyia2001.github.io/images/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Proxychains</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Snark&#39;s blog" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/05/09/hello-world/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2022/11/05/volatility/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&text=Proxychains"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&is_video=false&description=Proxychains"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Proxychains&body=Check out this article: http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&name=Proxychains&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&t=Proxychains"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEProxyChains"><span class="toc-number">1.</span> <span class="toc-text">设置ProxyChains</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Proxychains
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Snark</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-12-03T09:07:38.000Z" itemprop="datePublished">2022-12-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/tools/">tools</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/tools/" rel="tag">tools</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="设置ProxyChains"><a href="#设置ProxyChains" class="headerlink" title="设置ProxyChains"></a>设置ProxyChains</h1><p>ProxyChains是Linux和其他Unices下的代理工具。它可以使任何程序通过代理上网，允许TCP和DNS通过代理隧道，支持HTTP、SOCKS4和SOCKS5类型的代理服务器，并且可配置多个代理。ProxyChains通过一个用户定义的代理列表强制连接指定的应用程序，直接断开接收方和发送方的连接。本节将介绍设置ProxyChains的方法。</p>
+<p>设置ProxyChains的具体操作步骤如下所示。</p>
+<p>（1）打开ProxyChains配置文件。执行命令如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+
+<p>执行以上命令后，打开文件的内容如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># proxychains.conf VER 3.1</span><br><span class="line">#</span><br><span class="line"># HTTP, SOCKS4, SOCKS5 tunneling proxifier with DNS.</span><br><span class="line">#</span><br><span class="line"># The option below identifies how the ProxyList is treated.</span><br><span class="line"># only one option should be uncommented at time,</span><br><span class="line"># otherwise the last appearing option will be accepted</span><br><span class="line">#</span><br><span class="line">#dynamic_chain</span><br><span class="line">#</span><br><span class="line"># Dynamic - Each connection will be done via chained proxies</span><br><span class="line"># all proxies chained in the order as they appear in the list</span><br><span class="line"># at least one proxy must be online to play in chain</span><br><span class="line"># (dead proxies are skipped)</span><br><span class="line"># otherwise EINTR is returned to the app</span><br><span class="line">#</span><br><span class="line">strict_chain</span><br><span class="line">#</span><br><span class="line"># Strict - Each connection will be done via chained proxies</span><br><span class="line"># all proxies chained in the order as they appear in the list</span><br><span class="line"># all proxies must be online to play in chain</span><br><span class="line"># otherwise EINTR is returned to the app</span><br><span class="line">#</span><br><span class="line">#random_chain</span><br><span class="line">#</span><br><span class="line"># Random - Each connection will be done via random proxy</span><br><span class="line"># (or proxy chain, see chain_len) from the list.</span><br><span class="line"># this option is good to test your IDS :)</span><br></pre></td></tr></table></figure>
+
+<p>输出的信息就是proxychains.conf文件的内容。由于篇幅的原因，这里只列出了部分内容。</p>
+<p>（2）将proxychains.conf文件中的dynamic_chain前面的注释符取消。要修改的配置项，是上面加粗的部分，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dynamic_chain</span><br></pre></td></tr></table></figure>
+
+<p>（3）添加一些代理服务器到列表（proxychains.conf文件末尾），如下所示：</p>
+<p><img src="/../images/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/1.png"></p>
+<p>红框内填写代理服务器IP及端口，保存退出。</p>
+<p>（4）查看是否代理成功，执行命令如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains curl ipinfo.io</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/2.png"></p>
+<p>发现地址已经变成了台湾，说明代理成功了</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEProxyChains"><span class="toc-number">1.</span> <span class="toc-text">设置ProxyChains</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&text=Proxychains"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&is_video=false&description=Proxychains"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Proxychains&body=Check out this article: http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&title=Proxychains"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&name=Proxychains&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://emyia2001.github.io/2022/12/03/proxychains%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86/&t=Proxychains"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Snark
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/emyia2001">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
